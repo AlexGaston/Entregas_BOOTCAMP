@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+:root {
+  --blanco: #fff;
+  --negro: #212429;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+/*MENU NAVEGACIÓN*/
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  background-color: var(--blanco);
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  border-bottom: 1px solid var(--negro);
+}
+
+.text-menu {
+  color: var(--negro);
+  text-transform: uppercase;
+  text-decoration: none;
+  size: 16px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.menu-icon-burger {
+  margin-top: 10px;
+}
+
+.icon-menu {
+  margin-top: 10px;
+}
+
+.icon-menu img {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/*CONTENIDO MAIN*/
+main {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  font-size: 32px;
+  margin-top: 80px;
+  margin-left: 30px;
+}
+
+h2 span {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/*GRID LAYOUT*/
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.article {
+  padding: 8px;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*IMÁGEN*/
+
+.img-article {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+
+/*PIE DE FOTO*/
+
+.container-details-img {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  margin: 10px;
+  padding: 10px;
+}
+
+.precio {
+  text-align: right;
+  font-weight: bold;
+}
+
+.left {
+  text-align: left;
+}
+
+/*FOTTER*/
+footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: var(--negro);
+  color: var(--blanco);
+  justify-content: space-around;
+}
+
+.foot-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  margin: 20px;
+  padding: 5px;
+}
+
+.icon-box {
+  background-color: var(--blanco);
+  margin-top: 10px;
+  margin-left: 10px;
+  padding-left: 8px;
+  padding-top: 10px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+
+.foot-box p {
+  margin-left: 10px;
+  padding-top: 20px;
+}
+/* La media query que tienes para los 1280px puedes quitarla no es necesaria
+@media (max-width: 1280px) {
+  main {
+    width: 100%;
+  }
+}*/
+
+@media (max-width: 920px) {
+  .opciones {
+    display: none;
+  }
+  .icon-menu {
+    display: none;
+  }
+  h2 {
+    text-align: center;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  footer {
+    display: flex;
+    flex-direction: column;
+  }
+  .foot-box {
+    border-bottom: var(--blanco) solid 1px;
+    margin: 5px;
+  }
+}
