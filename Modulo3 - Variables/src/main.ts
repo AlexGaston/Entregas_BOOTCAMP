@@ -1,7 +1,5 @@
 import "./style.css";
 
-import "./style.css";
-
 /*
 Módulo 3 - Variables - Laboratorio:
 
@@ -29,6 +27,7 @@ The Rolling Stones / 1962 / Activo: true / 🎸 Rock
 
 //Creamos las diferentes variables de genero de música
 
+const estiloTitulo = "color:green; font-size:18px; font-weight:bold;";
 const popRock = "🎵 Pop Rock";
 const rock = "🎸 Rock";
 const hardRock = "🤘 Hard Rock";
@@ -51,8 +50,10 @@ const banda1: banda = {
   enActivo: true,
   genero: popRock,
 };
-
-console.log(banda1);
+console.log(`%c ${banda1.nombre}`, estiloTitulo);
+console.log(
+  ` ${banda1.año} / En activo: ${banda1.enActivo} / ${banda1.genero}`
+);
 
 const banda2: banda = {
   nombre: "Queen",
@@ -61,7 +62,10 @@ const banda2: banda = {
   genero: rock,
 };
 
-console.log(banda2);
+console.log(`%c ${banda2.nombre}`, estiloTitulo);
+console.log(
+  ` ${banda2.año} / En activo: ${banda2.enActivo} / ${banda2.genero}`
+);
 
 const banda3: banda = {
   nombre: "AC DC",
@@ -70,7 +74,10 @@ const banda3: banda = {
   genero: hardRock,
 };
 
-console.log(banda3);
+console.log(`%c ${banda3.nombre}`, estiloTitulo);
+console.log(
+  ` ${banda3.año} / En activo: ${banda3.enActivo} / ${banda3.genero}`
+);
 
 const banda4: banda = {
   nombre: "Ludwig van Beethoven",
@@ -79,7 +86,10 @@ const banda4: banda = {
   genero: clasica,
 };
 
-console.log(banda4);
+console.log(`%c ${banda4.nombre}`, estiloTitulo);
+console.log(
+  ` ${banda4.año} / En activo: ${banda4.enActivo} / ${banda4.genero}`
+);
 
 const banda5: banda = {
   nombre: "The Rolling Stones",
@@ -88,4 +98,7 @@ const banda5: banda = {
   genero: rock,
 };
 
-console.log(banda5);
+console.log(`%c ${banda5.nombre}`, estiloTitulo);
+console.log(
+  ` ${banda5.año} / En activo: ${banda5.enActivo} / ${banda5.genero}`
+);
