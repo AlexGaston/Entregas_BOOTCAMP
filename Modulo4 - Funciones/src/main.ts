@@ -1,21 +1,21 @@
 import "./style.css";
 
-// Inicializamos el turnoInicial con valor a 1 y inicializamos donde se va a mostrar el turno
+// Inicializamos el turnoInicial con valor a 1
 let turnoInicial = 1;
 
-// función para incrementar el turno
+// función para incrementar el turno, devolviendo el turno inicial actualizado
 const siguienteTurno = (): number => {
   turnoInicial = turnoInicial + 1;
   return turnoInicial;
 };
 
-// función para decrementar el turno
+// función para decrementar el turno, devolviendo el turno inicial actualizado
 const anteriorTurno = (): number => {
   turnoInicial = turnoInicial - 1;
   return turnoInicial;
 };
 
-// función para resetear el contador de turno
+// función para resetear el contador de turno, devolviendo el turno inicial a 0
 function resetTurno() {
   const turnoActual = document.getElementById("numeroTurno");
   const resetTurno = 0;
@@ -59,6 +59,7 @@ const handlerBotonAnterior = () => {
 botonAnterior?.addEventListener("click", () => {
   handlerBotonAnterior();
 });
+
 //Damos de alta el botón de reset
 const botonReset = document.getElementById("reset");
 botonReset?.addEventListener("click", resetTurno);
