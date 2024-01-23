@@ -26,6 +26,21 @@ function resetTurno() {
   return turnoInicial;
 }
 
+// función para saltar directamente al turno X
+function saltarTurno() {
+  // Donde vamos a pintar el turno
+  const turnoActual = document.getElementById("numeroTurno");
+  const turnoXpress = (
+    document.getElementById("saltoTurno") as HTMLInputElement
+  ).value;
+  console.log("Valor turnoXpress: " + turnoXpress);
+  if (turnoActual !== null && turnoActual !== undefined) {
+    turnoActual.textContent = turnoXpress.toString();
+  }
+  turnoInicial = parseInt(turnoXpress);
+  return turnoInicial;
+}
+
 //Damos de alta el boton siguiente
 const botonSiguiente = document.getElementById("siguiente");
 
@@ -63,3 +78,7 @@ botonAnterior?.addEventListener("click", () => {
 //Damos de alta el botón de reset
 const botonReset = document.getElementById("reset");
 botonReset?.addEventListener("click", resetTurno);
+
+//Damos de alta el botón de Saltar turno
+const botonSalto = document.getElementById("salto");
+botonSalto?.addEventListener("click", saltarTurno);
