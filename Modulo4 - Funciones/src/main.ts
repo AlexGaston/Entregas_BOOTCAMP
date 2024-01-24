@@ -35,7 +35,6 @@ function saltarTurno() {
   const turnoActual = document.getElementById("numeroTurno");
   // Guardamos el Input donde introducimos el turno
   const turnoXpress = document.getElementById("saltoTurno");
-  console.log("Valor turnoXpress: " + turnoXpress);
 
   if (
     turnoActual !== null &&
@@ -49,6 +48,7 @@ function saltarTurno() {
     ) {
       turnoActual.textContent = turnoXpress.value.padStart(2, "0");
       turnoInicial = parseInt(turnoXpress.value);
+      console.log("Valor turnoXpress: " + turnoXpress.value);
     }
   }
 }
