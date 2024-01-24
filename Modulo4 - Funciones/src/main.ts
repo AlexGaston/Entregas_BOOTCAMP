@@ -17,28 +17,40 @@ const anteriorTurno = (): number => {
 
 // función para resetear el contador de turno, devolviendo el turno inicial a 0
 function resetTurno() {
-  const turnoActual = document.getElementById("numeroTurno");
-  const resetTurno = 0;
-  if (turnoActual !== null && turnoActual !== undefined) {
-    turnoActual.textContent = resetTurno.toString();
-  }
   turnoInicial = 0;
-  return turnoInicial;
+  const turnoActual = document.getElementById("numeroTurno");
+
+  if (
+    turnoActual !== null &&
+    turnoActual !== undefined &&
+    turnoActual instanceof HTMLHeadingElement
+  ) {
+    turnoActual.textContent = turnoInicial.toString().padStart(2, "0");
+  }
 }
 
 // función para saltar directamente al turno X
 function saltarTurno() {
   // Donde vamos a pintar el turno
   const turnoActual = document.getElementById("numeroTurno");
-  const turnoXpress = (
-    document.getElementById("saltoTurno") as HTMLInputElement
-  ).value;
+  // Guardamos el Input donde introducimos el turno
+  const turnoXpress = document.getElementById("saltoTurno");
   console.log("Valor turnoXpress: " + turnoXpress);
-  if (turnoActual !== null && turnoActual !== undefined) {
-    turnoActual.textContent = turnoXpress.toString();
+
+  if (
+    turnoActual !== null &&
+    turnoActual !== undefined &&
+    turnoActual instanceof HTMLHeadingElement
+  ) {
+    if (
+      turnoXpress !== null &&
+      turnoXpress !== undefined &&
+      turnoXpress instanceof HTMLInputElement
+    ) {
+      turnoActual.textContent = turnoXpress.value.padStart(2, "0");
+      turnoInicial = parseInt(turnoXpress.value);
+    }
   }
-  turnoInicial = parseInt(turnoXpress);
-  return turnoInicial;
 }
 
 //Damos de alta el boton siguiente
@@ -49,12 +61,20 @@ const handlerBotonSiguiente = () => {
   console.log(turnoInicial);
   const turnoSiguiente = siguienteTurno();
   const turnoActual = document.getElementById("numeroTurno");
-  if (turnoActual !== null && turnoActual !== undefined) {
+  if (
+    turnoActual !== null &&
+    turnoActual !== undefined &&
+    turnoActual instanceof HTMLHeadingElement
+  ) {
     turnoActual.textContent = turnoSiguiente.toString().padStart(2, "0");
   }
 };
 
-if (botonSiguiente !== null && botonSiguiente !== undefined) {
+if (
+  botonSiguiente !== null &&
+  botonSiguiente !== undefined &&
+  botonSiguiente instanceof HTMLButtonElement
+) {
   botonSiguiente.addEventListener("click", () => {
     handlerBotonSiguiente();
   });
@@ -66,19 +86,40 @@ const botonAnterior = document.getElementById("anterior");
 const handlerBotonAnterior = () => {
   const turnoAnterior = anteriorTurno();
   const turnoActual = document.getElementById("numeroTurno");
-  if (turnoActual !== null && turnoActual !== undefined) {
+  if (
+    turnoActual !== null &&
+    turnoActual !== undefined &&
+    turnoActual instanceof HTMLHeadingElement
+  ) {
     turnoActual.textContent = turnoAnterior.toString().padStart(2, "0");
   }
 };
-
-botonAnterior?.addEventListener("click", () => {
-  handlerBotonAnterior();
-});
+if (
+  botonAnterior !== null &&
+  botonAnterior !== undefined &&
+  botonAnterior instanceof HTMLButtonElement
+) {
+  botonAnterior.addEventListener("click", () => {
+    handlerBotonAnterior();
+  });
+}
 
 //Damos de alta el botón de reset
 const botonReset = document.getElementById("reset");
-botonReset?.addEventListener("click", resetTurno);
+if (
+  botonReset !== null &&
+  botonReset !== undefined &&
+  botonReset instanceof HTMLButtonElement
+) {
+  botonReset.addEventListener("click", resetTurno);
+}
 
 //Damos de alta el botón de Saltar turno
 const botonSalto = document.getElementById("salto");
-botonSalto?.addEventListener("click", saltarTurno);
+if (
+  botonSalto !== null &&
+  botonSalto !== undefined &&
+  botonSalto instanceof HTMLButtonElement
+) {
+  botonSalto.addEventListener("click", saltarTurno);
+}
