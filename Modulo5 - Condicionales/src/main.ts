@@ -100,7 +100,39 @@ const setPuntacion_Jugador = (puntosYaSumados: number) => {
   return (puntacion_Jugador = puntosYaSumados);
 };
 
-const handlepedirCarta = () => {
+const elementoComprobarPuntacion = document.getElementById("mensajeJuego");
+
+const gestionarGameOver = (puntacion: number) => {
+  if (puntacion > 7.5) {
+    if (
+      elementoComprobarPuntacion !== null &&
+      elementoComprobarPuntacion !== undefined
+    ) {
+      elementoComprobarPuntacion.innerHTML =
+        "¡GAME OVER has superado 7 y medio!";
+    }
+  } else {
+    if (
+      elementoComprobarPuntacion !== null &&
+      elementoComprobarPuntacion !== undefined
+    ) {
+      elementoComprobarPuntacion.innerHTML = "¿Otra carta?";
+    }
+  }
+};
+
+const deshabilitarBotonPedirCarta = (puntacion: number) => {
+  if (puntacion > 7.5) {
+    if (
+      botonDameCarta !== null &&
+      botonDameCarta !== undefined &&
+      botonDameCarta instanceof HTMLButtonElement
+    )
+      botonDameCarta.disabled = true;
+  }
+};
+
+const handlePedirCarta = () => {
   const numeroAleatorio: number = obtenerNumeroAleatorio();
   const numeroCarta = obtenerNumeroCarta(numeroAleatorio);
   console.log(numeroCarta);
@@ -112,9 +144,36 @@ const handlepedirCarta = () => {
   const puntosSumados = sumarPuntos(puntosCarta);
   setPuntacion_Jugador(puntosSumados);
   muestraPuntuacion();
+  gestionarGameOver(puntacion_Jugador);
+  deshabilitarBotonPedirCarta(puntacion_Jugador);
 };
 
 document.addEventListener("DOMContentLoaded", muestraPuntuacion);
 
+// Boton Dame una carta
 const botonDameCarta = document.getElementById("dameCarta");
-botonDameCarta?.addEventListener("click", handlepedirCarta);
+if (botonDameCarta !== null && botonDameCarta !== undefined) {
+  botonDameCarta.addEventListener("click", handlePedirCarta);
+}
+
+//Boton me planto
+/*
+Si su puntuación es menor que 4, mostrar un mensaje que diga "Has sido muy conservador".
+
+Si la puntuación ha sido 5, mostrar un mensaje que diga "Te ha entrado el canguelo eh?".
+
+Si la puntuación ha sido 6 o 7, mostrar un mensaje que diga... "Casi casi...".
+
+Si la puntuación es 7.5, mostrar un mensaje que diga "¡ Lo has clavado! ¡Enhorabuena!"
+*/
+
+const muestraMensajeCuandoTePlantas = () => {};
+
+const handleMePlanto = () => {
+  deshabilitarBotonPedirCarta(8);
+};
+
+const botonMePlanto = document.getElementById("mePlanto");
+if (botonMePlanto !== null && botonMePlanto !== undefined) {
+  botonMePlanto.addEventListener("click", handleMePlanto);
+}
