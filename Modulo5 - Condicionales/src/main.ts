@@ -286,6 +286,7 @@ const borrarBotonQuePasaria = () => {
 const handleBotonQuePasaria = () => {
   handlePedirCarta();
   borrarBotonQuePasaria();
+  deshabilitarBotonMePlanto(8);
 };
 
 const botonQuePasaria = document.getElementById("quepasaria");
