@@ -5,23 +5,31 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rye&display=swap"
+      rel="stylesheet"
+    />
     <title>Vite + TS</title>
   </head>
   <body>
     <div id="app">
-      <h1>Juego del 7 i 1/2</h1>
-      <div id="puntacion"></div>
+      <h1>Juego del 7 y 1/2</h1>
+      <div class="textoPuntos">Tu puntación es: <b id="puntacion"></b></div>
+
       <div>
         <div>
           <img
             id="imagenCarta"
             src="./src/img/back.jpg"
             alt="Carta seleccionada"
+            class="fondoCarta"
           />
         </div>
         <button id="dameCarta">Pedir Carta</button>
-        <button id="mePlanto">Me planto</button>
-        <div id="mensajeJuego"></div>
+        <button id="mePlanto" disabled>Me planto</button>
+        <button id="nuevaPartida" disabled>Nueva Partida</button>
+        <div id="mensajeJuego" class="mensajeJuego"></div>
+        <button id="quepasaria" hidden>Que hubiera pasado...</button>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rye&family=Sigmar+One&display=swap");
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -35,6 +37,8 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: "Rye", serif;
+  color: #ffffff;
 }
 
 #app {
@@ -95,4 +99,23 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.fondoCarta {
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+.mensajeJuego {
+  background-color: #ffffff;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 15px;
+  height: 30px;
+}
+
+.textoPuntos {
+  color: #ffffff;
+  size: 25px;
 }
