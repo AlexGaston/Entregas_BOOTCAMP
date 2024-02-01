@@ -97,29 +97,37 @@ const sumarPuntos = (puntos: number) => {
 };
 
 const setPuntacion_Jugador = (puntosYaSumados: number) => {
-  return (puntacion_Jugador = puntosYaSumados);
+  puntacion_Jugador = puntosYaSumados;
 };
 
 const elementoComprobarPuntacion = document.getElementById("mensajeJuego");
 
-const gestionarGameOver = (puntacion: number) => {
+const gestionarPartida = (puntacion: number) => {
   if (puntacion > 7.5) {
     pintarMensaje("¡GAME OVER has superado 7 y medio!");
     habilitarBotonNuevaPartida();
-  } else {
+    deshabilitarBotonMePlanto();
+    deshabilitarBotonPedirCarta();
+  }
+  if (puntacion === 7.5) {
+    pintarMensaje(dameMensajeCuandoTePlantas(puntacion));
+    habilitarBotonNuevaPartida();
+    deshabilitarBotonMePlanto();
+    deshabilitarBotonPedirCarta();
+  }
+  if (puntacion < 7.5) {
     pintarMensaje("¿Quieres otra carta?");
+    habilitarBotonMePlanto();
   }
 };
 
-const deshabilitarBotonPedirCarta = (puntacion: number) => {
-  if (puntacion > 7.5) {
-    if (
-      botonDameCarta !== null &&
-      botonDameCarta !== undefined &&
-      botonDameCarta instanceof HTMLButtonElement
-    )
-      botonDameCarta.disabled = true;
-  }
+const deshabilitarBotonPedirCarta = () => {
+  if (
+    botonDameCarta !== null &&
+    botonDameCarta !== undefined &&
+    botonDameCarta instanceof HTMLButtonElement
+  )
+    botonDameCarta.disabled = true;
 };
 
 const handlePedirCarta = () => {
@@ -131,43 +139,40 @@ const handlePedirCarta = () => {
   const puntosCarta = obtenerPuntosDeLaCarta(numeroCarta);
   const puntosSumados = sumarPuntos(puntosCarta);
   setPuntacion_Jugador(puntosSumados);
-  habilitarBotonMePlanto(puntacion_Jugador);
   muestraPuntuacion();
-  gestionarGameOver(puntacion_Jugador);
-  deshabilitarBotonPedirCarta(puntacion_Jugador);
-  deshabilitarBotonMePlanto(puntacion_Jugador);
+  gestionarPartida(puntacion_Jugador);
 };
 
 document.addEventListener("DOMContentLoaded", muestraPuntuacion);
 
 // Boton Dame una carta
 const botonDameCarta = document.getElementById("dameCarta");
-if (botonDameCarta !== null && botonDameCarta !== undefined) {
+if (
+  botonDameCarta !== null &&
+  botonDameCarta !== undefined &&
+  botonDameCarta instanceof HTMLButtonElement
+) {
   botonDameCarta.addEventListener("click", handlePedirCarta);
 }
 
 //Boton me planto
-const habilitarBotonMePlanto = (puntacion: number) => {
-  if (puntacion !== 0) {
-    if (
-      botonMePlanto !== null &&
-      botonMePlanto !== undefined &&
-      botonMePlanto instanceof HTMLButtonElement
-    ) {
-      botonMePlanto.disabled = false;
-    }
+const habilitarBotonMePlanto = () => {
+  if (
+    botonMePlanto !== null &&
+    botonMePlanto !== undefined &&
+    botonMePlanto instanceof HTMLButtonElement
+  ) {
+    botonMePlanto.disabled = false;
   }
 };
 
-const deshabilitarBotonMePlanto = (puntacion: number) => {
-  if (puntacion > 7.5) {
-    if (
-      botonMePlanto !== null &&
-      botonMePlanto !== undefined &&
-      botonMePlanto instanceof HTMLButtonElement
-    ) {
-      botonMePlanto.disabled = true;
-    }
+const deshabilitarBotonMePlanto = () => {
+  if (
+    botonMePlanto !== null &&
+    botonMePlanto !== undefined &&
+    botonMePlanto instanceof HTMLButtonElement
+  ) {
+    botonMePlanto.disabled = true;
   }
 };
 
@@ -197,16 +202,20 @@ const pintarMensaje = (mensaje: string) => {
 };
 
 const handleMePlanto = () => {
-  deshabilitarBotonPedirCarta(8);
+  deshabilitarBotonPedirCarta();
   const mensajeCuandoMePlanto = dameMensajeCuandoTePlantas(puntacion_Jugador);
   pintarMensaje(mensajeCuandoMePlanto);
   habilitarBotonNuevaPartida();
-  deshabilitarBotonMePlanto(8);
+  deshabilitarBotonMePlanto();
   pintarBotonQuePasaria();
 };
 
 const botonMePlanto = document.getElementById("mePlanto");
-if (botonMePlanto !== null && botonMePlanto !== undefined) {
+if (
+  botonMePlanto !== null &&
+  botonMePlanto !== undefined &&
+  botonMePlanto instanceof HTMLButtonElement
+) {
   botonMePlanto.addEventListener("click", handleMePlanto);
 }
 
@@ -233,7 +242,7 @@ const deshabilitarBotonNuevaPartida = () => {
 };
 
 const resetPuntacion = () => {
-  return (puntacion_Jugador = 0);
+  puntacion_Jugador = 0;
 };
 
 const habilitarBotonPedirCarta = () => {
@@ -248,12 +257,12 @@ const habilitarBotonPedirCarta = () => {
 
 const handelNuevaPartida = () => {
   resetPuntacion();
-  habilitarBotonPedirCarta();
   pintarMensaje("Vamos a por la nueva partida!!");
-  deshabilitarBotonNuevaPartida();
   pintarUrlDeLaCarta("./src/img/back.jpg");
   muestraPuntuacion();
   borrarBotonQuePasaria();
+  habilitarBotonPedirCarta();
+  deshabilitarBotonNuevaPartida();
 };
 
 const botonNuevaPartida = document.getElementById("nuevaPartida");
@@ -283,10 +292,39 @@ const borrarBotonQuePasaria = () => {
   }
 };
 
+const gestionarQueHubieraPasado = (puntacion: number) => {
+  if (puntacion > 7.5) {
+    pintarMensaje("¡GAME OVER has hecho bien en plantarte");
+    habilitarBotonNuevaPartida();
+    deshabilitarBotonMePlanto();
+    deshabilitarBotonPedirCarta();
+  }
+  if (puntacion === 7.5) {
+    pintarMensaje("¡Tendrías que haber arriesgado!");
+    habilitarBotonNuevaPartida();
+    deshabilitarBotonMePlanto();
+    deshabilitarBotonPedirCarta();
+  }
+  if (puntacion < 7.5) {
+    pintarMensaje("¡Te has plantado demasiado pronto!");
+    habilitarBotonMePlanto();
+  }
+};
+
 const handleBotonQuePasaria = () => {
-  handlePedirCarta();
+  //handlePedirCarta();
+  const numeroAleatorio: number = obtenerNumeroAleatorio();
+  const numeroCarta = obtenerNumeroCarta(numeroAleatorio);
+  console.log(numeroCarta);
+  const urlDeLaCarta = dameUrlDeLaCarta(numeroCarta);
+  pintarUrlDeLaCarta(urlDeLaCarta);
+  const puntosCarta = obtenerPuntosDeLaCarta(numeroCarta);
+  const puntosSumados = sumarPuntos(puntosCarta);
+  setPuntacion_Jugador(puntosSumados);
+  muestraPuntuacion();
+  gestionarQueHubieraPasado(puntacion_Jugador);
   borrarBotonQuePasaria();
-  deshabilitarBotonMePlanto(8);
+  deshabilitarBotonMePlanto();
 };
 
 const botonQuePasaria = document.getElementById("quepasaria");
