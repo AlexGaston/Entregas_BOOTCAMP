@@ -287,7 +287,6 @@ const handleBotonQuePasaria = () => {
   handlePedirCarta();
   borrarBotonQuePasaria();
   deshabilitarBotonMePlanto(8);
-  pintarMensaje("¿Otra partida?");
 };
 
 const botonQuePasaria = document.getElementById("quepasaria");
