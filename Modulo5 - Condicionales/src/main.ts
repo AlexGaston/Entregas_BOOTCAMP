@@ -285,6 +285,7 @@ const borrarBotonQuePasaria = () => {
 
 const handleBotonQuePasaria = () => {
   handlePedirCarta();
+  borrarBotonQuePasaria();
 };
 
 const botonQuePasaria = document.getElementById("quepasaria");
