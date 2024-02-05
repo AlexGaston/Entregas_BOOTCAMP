@@ -1,17 +1,6 @@
 import "./style.css";
 
-let puntacion_Jugador: number = 0;
-// Damos de alta las cartas
-const AS_DE_COPAS = 1;
-const DOS_DE_COPAS = 2;
-const TRES_DE_COPAS = 3;
-const CUATRO_DE_COPAS = 4;
-const CINCO_DE_COPAS = 5;
-const SEIS_DE_COPAS = 6;
-const SIETE_DE_COPAS = 7;
-const SOTA_DE_COPAS = 10;
-const CABALLO_DE_COPAS = 11;
-const REY_DE_COPAS = 12;
+import {puntacion_Jugador, AS_DE_COPAS, DOS_DE_COPAS, TRES_DE_COPAS, CUATRO_DE_COPAS, CINCO_DE_COPAS, SEIS_DE_COPAS, SIETE_DE_COPAS, SOTA_DE_COPAS, CABALLO_DE_COPAS, REY_DE_COPAS} from './model';
 
 //Muestra la puntación en pantalla
 function muestraPuntuacion() {
