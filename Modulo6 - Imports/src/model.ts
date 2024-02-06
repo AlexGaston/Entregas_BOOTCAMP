@@ -1,4 +1,11 @@
-export let puntacion_Jugador: number = 0;
+interface Partida {
+  puntacionJugador: number;
+}
+
+export const partida: Partida = {
+  puntacionJugador: 0,
+};
+
 // Damos de alta las cartas
 export const AS_DE_COPAS = 1;
 export const DOS_DE_COPAS = 2;
