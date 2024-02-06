@@ -35,20 +35,35 @@ import {
   handleBotonQuePasaria,
 } from "./ui";
 
-document.addEventListener("DOMContentLoaded", muestraPuntuacion);
-
-if (botonDameCarta !== null && botonDameCarta !== undefined) {
-  botonDameCarta.addEventListener("click", handlePedirCarta);
-}
-
-if (botonQuePasaria !== null && botonQuePasaria !== undefined) {
-  botonQuePasaria.addEventListener("click", handleBotonQuePasaria);
-}
-
-if (botonMePlanto !== null && botonMePlanto !== undefined) {
-  botonMePlanto.addEventListener("click", handleMePlanto);
-}
-
-if (botonNuevaPartida !== null && botonNuevaPartida !== undefined) {
-  botonNuevaPartida.addEventListener("click", handelNuevaPartida);
-}
+const empezarPartida = () => {
+  if (
+    botonDameCarta !== null &&
+    botonDameCarta !== undefined &&
+    botonDameCarta instanceof HTMLButtonElement
+  ) {
+    botonDameCarta.addEventListener("click", handlePedirCarta);
+  }
+  if (
+    botonQuePasaria !== null &&
+    botonQuePasaria !== undefined &&
+    botonQuePasaria instanceof HTMLButtonElement
+  ) {
+    botonQuePasaria.addEventListener("click", handleBotonQuePasaria);
+  }
+  if (
+    botonMePlanto !== null &&
+    botonMePlanto !== undefined &&
+    botonDameCarta instanceof HTMLButtonElement
+  ) {
+    botonMePlanto.addEventListener("click", handleMePlanto);
+  }
+  if (
+    botonNuevaPartida !== null &&
+    botonNuevaPartida !== undefined &&
+    botonNuevaPartida instanceof HTMLButtonElement
+  ) {
+    botonNuevaPartida.addEventListener("click", handelNuevaPartida);
+  }
+  muestraPuntuacion();
+};
+document.addEventListener("DOMContentLoaded", empezarPartida);
