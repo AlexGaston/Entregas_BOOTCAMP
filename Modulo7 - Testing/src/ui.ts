@@ -19,6 +19,7 @@ import {
   sumarPuntos,
   setPuntacion_Jugador,
   resetPuntacion,
+  obtenerEstadoPartida,
 } from "./motor";
 
 //Muestra la puntación en pantalla
@@ -112,19 +113,19 @@ const dameMensajeCuandoTePlantas = (puntacion: number) => {
 };
 
 const gestionarPartida = (puntacion: number) => {
-  if (puntacion > 7.5) {
+  if (obtenerEstadoPartida() === "TE_HAS_PASADO") {
     pintarMensaje("¡GAME OVER has superado 7 y medio!");
     habilitarBotonNuevaPartida();
     deshabilitarBotonMePlanto();
     deshabilitarBotonPedirCarta();
   }
-  if (puntacion === 7.5) {
+  if (obtenerEstadoPartida() === "JUSTO_MAXIMA") {
     pintarMensaje(dameMensajeCuandoTePlantas(puntacion));
     habilitarBotonNuevaPartida();
     deshabilitarBotonMePlanto();
     deshabilitarBotonPedirCarta();
   }
-  if (puntacion < 7.5) {
+  if (obtenerEstadoPartida() === "POR_DEBAJO_MAXIMO") {
     pintarMensaje("¿Quieres otra carta?");
     habilitarBotonMePlanto();
   }

@@ -1,4 +1,4 @@
-import { partida } from "./model";
+import { partida, EstadoPartida } from "./model";
 
 // Funcion para dar carta aleatoria del 1 al 10
 export const obtenerNumeroAleatorio = (): number => {
@@ -26,4 +26,14 @@ export const setPuntacion_Jugador = (puntosYaSumados: number) => {
 
 export const resetPuntacion = () => {
   partida.puntacionJugador = 0;
+};
+
+export const obtenerEstadoPartida = (): EstadoPartida => {
+  if (partida.puntacionJugador === 7.5) {
+    partida.estado = "JUSTO_MAXIMA";
+  }
+  if (partida.puntacionJugador > 7.5) {
+    partida.estado = "TE_HAS_PASADO";
+  }
+  return partida.estado;
 };

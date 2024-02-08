@@ -1,7 +1,9 @@
+import { EstadoPartida, partida } from "./model";
 import {
   obtenerNumeroCarta,
   obtenerNumeroAleatorio,
   obtenerPuntosDeLaCarta,
+  obtenerEstadoPartida,
 } from "./motor";
 import { vi } from "vitest";
 
@@ -72,5 +74,43 @@ describe("obtenerPuntosDeLaCarta", () => {
 
     //THEN o Assert
     expect(resultado).toBe(7);
+  });
+});
+
+describe("obtenerEstadoPartida", () => {
+  it("Debería de devolver POR_DEBAJO_MAXIMO, cuando puntacionJugador es MENOR a 7.5", () => {
+    //Arrange
+    const estadoESperado: EstadoPartida = "POR_DEBAJO_MAXIMO";
+    vi.spyOn(partida, "puntacionJugador", "get").mockReturnValue(4);
+
+    //Act
+    const resultado = obtenerEstadoPartida();
+
+    //Assert
+    expect(resultado).toBe(estadoESperado);
+  });
+
+  it("Debería de devolver JUSTO_MAXIMA, cuando puntacionJugador es IGUAL a 7.5", () => {
+    //Arrange
+    const estadoESperado: EstadoPartida = "JUSTO_MAXIMA";
+    vi.spyOn(partida, "puntacionJugador", "get").mockReturnValue(7.5);
+
+    //Act
+    const resultado = obtenerEstadoPartida();
+
+    //Assert
+    expect(resultado).toBe(estadoESperado);
+  });
+
+  it("Debería de devolver TE_HAS_PASADO, cuando puntacionJugador es MAYOR a 7.5", () => {
+    //Arrange
+    const estadoESperado: EstadoPartida = "TE_HAS_PASADO";
+    vi.spyOn(partida, "puntacionJugador", "get").mockReturnValue(10);
+
+    //Act
+    const resultado = obtenerEstadoPartida();
+
+    //Assert
+    expect(resultado).toBe(estadoESperado);
   });
 });
