@@ -92,12 +92,14 @@ const muestraPaciente = (paciente: Pacientes) => {
   especialidadPaciente.textContent = "Especialidad: " + paciente.especialidad;
   edadPaciente.textContent = `Edad Paciente: ${paciente.edad}`;
 
-  div?.appendChild(idPaciente);
-  div?.appendChild(nombrePaciente);
-  div?.appendChild(apellidosPaciente);
-  div?.appendChild(especialidadPaciente);
-  div?.appendChild(edadPaciente);
-  div?.appendChild(separador);
+  if (div !== null && div !== undefined && div instanceof HTMLElement) {
+    div.appendChild(idPaciente);
+    div.appendChild(nombrePaciente);
+    div.appendChild(apellidosPaciente);
+    div.appendChild(especialidadPaciente);
+    div.appendChild(edadPaciente);
+    div.appendChild(separador);
+  }
 };
 
 //APARTADO 1:
@@ -145,17 +147,17 @@ document.addEventListener("DOMContentLoaded", () =>
 //Queremos activar el protocolo de urgencia si cualquier de los pacientes tiene un ritmo cardíaco superior a 100 pulsaciones por minuto y una temperatura corporal superior a 39 grados.
 
 const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
-  let activarProctolo = false;
+  //let activarProctolo = false;
 
   for (let i = 0; i < pacientes.length; i++) {
     if (
       pacientes[i].frecuenciaCardiaca > 100 &&
       pacientes[i].temperatura > 39
     ) {
-      activarProctolo = true;
+      return true;
     }
   }
-  return activarProctolo;
+  return false;
 };
 
 console.log("Protocolo de urgencia: ", activarProtocoloUrgencia(pacientes));
