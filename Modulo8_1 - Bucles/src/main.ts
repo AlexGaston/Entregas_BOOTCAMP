@@ -92,7 +92,7 @@ const muestraPaciente = (paciente: Pacientes) => {
   especialidadPaciente.textContent = "Especialidad: " + paciente.especialidad;
   edadPaciente.textContent = `Edad Paciente: ${paciente.edad}`;
 
-  if (div !== null && div !== undefined && div instanceof HTMLElement) {
+  if (div !== null && div !== undefined && div instanceof HTMLDivElement) {
     div.appendChild(idPaciente);
     div.appendChild(nombrePaciente);
     div.appendChild(apellidosPaciente);
@@ -178,7 +178,10 @@ const reasignaPacientesAMedicoFamilia = (
   return resultadosPacientes;
 };
 
-console.log(reasignaPacientesAMedicoFamilia(pacientes));
+console.log(
+  "Reasignación de Pacientes: ",
+  reasignaPacientesAMedicoFamilia(pacientes)
+);
 
 //APARTADO 4:
 //Queremos saber si podemos mandar al Pediatra a casa (si no tiene pacientes asignados), comprobar si en la lista hay algún paciente asignado a pediatría
@@ -205,31 +208,41 @@ interface NumeroPacientesPorEspecialidad {
   pediatria: number;
   cardiologia: number;
 }
-
+/*
 let pacientesPorEspecialidad: NumeroPacientesPorEspecialidad = {
   medicoDeFamilia: 0,
   pediatria: 0,
   cardiologia: 0,
-};
+};*/
 
 const cuentaPacientesPorEspecialidad = (
   pacientes: Pacientes[]
 ): NumeroPacientesPorEspecialidad => {
-  for (let i = 0; i < pacientes.length; i++) {
-    if (pacientes[i].especialidad === "Medico de familia") {
-      pacientesPorEspecialidad.medicoDeFamilia =
-        pacientesPorEspecialidad.medicoDeFamilia + 1;
-    }
-    if (pacientes[i].especialidad === "Pediatra") {
-      pacientesPorEspecialidad.pediatria =
-        pacientesPorEspecialidad.pediatria + 1;
-    }
-    if (pacientes[i].especialidad === "Cardiólogo") {
-      pacientesPorEspecialidad.cardiologia =
-        pacientesPorEspecialidad.cardiologia + 1;
-    }
-  }
-  return pacientesPorEspecialidad;
+  return {
+    medicoDeFamilia: cuentaPacientePorEspecialidad(
+      pacientes,
+      "Medico de familia"
+    ),
+    pediatria: cuentaPacientePorEspecialidad(pacientes, "Pediatra"),
+    cardiologia: cuentaPacientePorEspecialidad(pacientes, "Cardiólogo"),
+  };
 };
 
-console.log(cuentaPacientesPorEspecialidad(pacientes));
+const cuentaPacientePorEspecialidad = (
+  pacientes: Pacientes[],
+  especialidad: Especialidad
+) => {
+  let contador = 0;
+
+  for (let i = 0; i < pacientes.length; i++) {
+    if (pacientes[i].especialidad === especialidad) {
+      contador++;
+    }
+  }
+  return contador;
+};
+
+console.log(
+  "Número de Pacientes por especialidad: ",
+  cuentaPacientesPorEspecialidad(pacientes)
+);
