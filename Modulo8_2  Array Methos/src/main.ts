@@ -50,7 +50,7 @@ const pacientes: Pacientes[] = [
     nombre: "Mary",
     apellidos: "Wien",
     sexo: "Female",
-    temperatura: 36.8,
+    temperatura: 39,
     frecuenciaCardiaca: 120,
     especialidad: "Medico de familia",
     edad: 20,
@@ -110,13 +110,11 @@ console.log(
 //Queremos activar el protocolo de urgencia si cualquier de los pacientes tiene un ritmo cardíaco superior a 100 pulsaciones por minuto y una temperatura corporal superior a 39 grados.
 
 const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
-  let activarProctolo = false;
+  //let activarProctolo = false;
 
-  pacientes.find(
+  return pacientes.some(
     (paciente) => paciente.frecuenciaCardiaca > 100 && paciente.temperatura > 39
   );
-
-  return activarProctolo;
 };
 
 console.log(
