@@ -9,6 +9,7 @@
   </head>
   <body>
     <div id="app">
+      <div id="mensajePartida"></div>
       <div id="grid-container">
         <div data-indice-id="carta0" class="grid-item">
           <img src="./src/img/back.png" alt="carta1" data-indice-id="carta0" />
@@ -54,6 +55,10 @@
             data-indice-id="carta11"
           />
         </div>
+      </div>
+      <div>
+        <button id="iniciaPartida">Empezar partida</button>
+        <div>Parejas encontradas: <b id="parejasEncontradas">0</b> de 6</div>
       </div>
     </div>
     <script type="module" src="./src/main.ts"></script>

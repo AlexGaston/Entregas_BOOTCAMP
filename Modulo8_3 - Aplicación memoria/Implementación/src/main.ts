@@ -1,29 +1,29 @@
 import "./style.css";
 
-import { Carta, cartas, Tablero } from "./modelo";
+import { cartas, infoCartas, tablero } from "./modelo";
+import { iniciaPartida } from "./motor";
+import { girarCarta } from "./ui";
 
-/*
-En el motor nos va a hacer falta un método para barajar cartas
+// Boton iniciar Partida
+const botonInicioPartida = document.getElementById("iniciaPartida");
+if (
+  botonInicioPartida !== null &&
+  botonInicioPartida !== undefined &&
+  botonInicioPartida instanceof HTMLButtonElement
+) {
+  botonInicioPartida.addEventListener("click", () => iniciaPartida(tablero));
+}
 
+// Creando los elementos del tablero
+for (let i = 0; i < tablero.cartas.length; i++) {
+  const dataIndiceId = `[data-indice-id="carta${i}"]`;
+  const elementoDiv = document.querySelector(`div${dataIndiceId}`);
 
-
-const barajarCartas = (cartas: Carta[]): Carta[] => {
-  let baraja = cartas
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-  return baraja;
-};
-
-console.log(barajarCartas(cartas));*/
-
-const darleLaVueltaALaCarta = (indice: number) => {
-  if (partida.estadoPartida === "CeroCartasLevantada") {
-    partida.indeceCartaVolteadaA = indice;
-    partida.estadoPartida = "UnaCartaLevantada";
-  } else if (partida.estadoPartida === "UnaCartaLevantada") {
-    partida.indeceCartaVolteadaB = indice;
-    partida.estadoPartida = "DosCartaLevantada";
+  if (
+    elementoDiv !== null &&
+    elementoDiv !== undefined &&
+    elementoDiv instanceof HTMLDivElement
+  ) {
+    elementoDiv.addEventListener("click", () => girarCarta(tablero, i));
   }
-};
-partida.cartas[indiceA].idFoto === partida.cartas[indiceB].idFoto;
+}

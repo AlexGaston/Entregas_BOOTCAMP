@@ -12,7 +12,7 @@ interface InfoCarta {
 }
 
 /* Aquí ponemos seis cartas siguiendo la interfaz de InfoCarta */
-const infoCartas: InfoCarta[] = [
+export const infoCartas: InfoCarta[] = [
   {
     idFoto: 1,
     imagen: "./src/img/1.png", //LEON
@@ -46,7 +46,9 @@ const crearCartaInicial = (idFoto: number, imagen: string): Carta => ({
   encontrada: false,
 });
 
-const crearColeccionDeCartasInicial = (infoCartas: InfoCarta[]): Carta[] => {
+export const crearColeccionDeCartasInicial = (
+  infoCartas: InfoCarta[]
+): Carta[] => {
   /* Aquí crearemos un array de cartas a partir de un array de infoCartas
          y duplicaremos las cartas para que haya dos de cada tipo.
       */

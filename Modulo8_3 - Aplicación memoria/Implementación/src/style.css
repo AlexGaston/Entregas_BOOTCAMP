@@ -106,6 +106,7 @@ button:focus-visible {
   padding: 10px;
   display: flex;
   justify-content: center;
+  height: 150px;
 }
 .grid-item img {
   border-radius: 15px;
