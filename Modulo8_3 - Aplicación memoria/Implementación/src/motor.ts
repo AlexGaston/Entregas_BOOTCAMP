@@ -215,4 +215,42 @@ export const iniciaPartida = (tablero: Tablero): void => {
   tablero.cartas = [...cartaBarajadas];
   console.log("tablero.carta: ", tablero.cartas);
   tablero.estadoPartida = "PartidaNoIniciada";
+  voltearCartasPartidaNueva(tablero);
+  numeroParejasEncontradas = 0;
+  borrarMensajesPartida();
+};
+
+const voltearCartasPartidaNueva = (tablero: Tablero) => {
+  for (let i = 0; i < tablero.cartas.length; i++) {
+    const dataIndiceId = `[data-indice-id="carta${i}"]`;
+    const cartaImagen = document.querySelector(`img${dataIndiceId}`);
+    if (
+      cartaImagen !== null &&
+      cartaImagen !== undefined &&
+      cartaImagen instanceof HTMLImageElement
+    ) {
+      cartaImagen.src = "./src/img/back.png";
+    }
+  }
+};
+
+const borrarMensajesPartida = () => {
+  const resultado = document.getElementById("parejasEncontradas");
+  const mensajePartida = document.getElementById("mensajePartida");
+
+  if (
+    resultado !== null &&
+    resultado !== undefined &&
+    resultado instanceof HTMLElement
+  ) {
+    resultado.innerHTML = String(0);
+  }
+
+  if (
+    mensajePartida !== null &&
+    mensajePartida !== undefined &&
+    mensajePartida instanceof HTMLDivElement
+  ) {
+    mensajePartida.innerHTML = " ";
+  }
 };
