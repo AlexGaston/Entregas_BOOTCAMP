@@ -62,9 +62,7 @@ export const voltearLaCarta = (tablero: Tablero, indice: number): void => {
   tablero.cartas[indice].estaVuelta = true;
 
   if (
-    tablero.indiceCartaVolteadaA !== null &&
     tablero.indiceCartaVolteadaA !== undefined &&
-    tablero.indiceCartaVolteadaB !== null &&
     tablero.indiceCartaVolteadaB !== undefined
   ) {
     if (
