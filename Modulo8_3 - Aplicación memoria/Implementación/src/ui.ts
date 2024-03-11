@@ -3,6 +3,9 @@ import {
   sePuedeVoltearLaCarta,
   voltearLaCarta,
   numeroParejasEncontradas,
+  sonPareja,
+  parejaEncontrada,
+  parejaNoEncontrada,
 } from "./motor";
 
 export const girarCarta = (tablero: Tablero, indice: number) => {
@@ -115,5 +118,32 @@ export const borrarMensajesPartida = () => {
     mensajePartida instanceof HTMLDivElement
   ) {
     mensajePartida.innerHTML = " ";
+  }
+};
+
+export const mirarSiLaSegundaCartaEspareja = (tablero: Tablero) => {
+  if (
+    tablero.indiceCartaVolteadaA !== undefined &&
+    tablero.indiceCartaVolteadaB !== undefined
+  ) {
+    if (
+      sonPareja(
+        tablero.indiceCartaVolteadaA,
+        tablero.indiceCartaVolteadaB,
+        tablero
+      )
+    ) {
+      parejaEncontrada(
+        tablero,
+        tablero.indiceCartaVolteadaA,
+        tablero.indiceCartaVolteadaB
+      );
+    } else {
+      parejaNoEncontrada(
+        tablero,
+        tablero.indiceCartaVolteadaA,
+        tablero.indiceCartaVolteadaB
+      );
+    }
   }
 };

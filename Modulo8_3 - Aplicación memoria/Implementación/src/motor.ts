@@ -10,6 +10,7 @@ import {
   pintarParejasEncontradas,
   voltearCartasPartidaNueva,
   borrarMensajesPartida,
+  mirarSiLaSegundaCartaEspareja,
 } from "./ui";
 /*
 En el motor nos va a hacer falta un método para barajar cartas
@@ -64,33 +65,6 @@ export const voltearLaCarta = (tablero: Tablero, indice: number): void => {
   mirarSiLaSegundaCartaEspareja(tablero);
 };
 
-const mirarSiLaSegundaCartaEspareja = (tablero: Tablero) => {
-  if (
-    tablero.indiceCartaVolteadaA !== undefined &&
-    tablero.indiceCartaVolteadaB !== undefined
-  ) {
-    if (
-      sonPareja(
-        tablero.indiceCartaVolteadaA,
-        tablero.indiceCartaVolteadaB,
-        tablero
-      )
-    ) {
-      parejaEncontrada(
-        tablero,
-        tablero.indiceCartaVolteadaA,
-        tablero.indiceCartaVolteadaB
-      );
-    } else {
-      parejaNoEncontrada(
-        tablero,
-        tablero.indiceCartaVolteadaA,
-        tablero.indiceCartaVolteadaB
-      );
-    }
-  }
-};
-
 /*
   Dos cartas son pareja si en el array de tablero de cada una tienen el mismo id
 */
@@ -106,7 +80,7 @@ export const sonPareja = (
     Aquí asumimos ya que son pareja, lo que hacemos es marcarlas como encontradas y comprobar si la partida esta completa.
   */
 
-const parejaEncontrada = (
+export const parejaEncontrada = (
   tablero: Tablero,
   indiceA: number,
   indiceB: number
@@ -126,7 +100,7 @@ const parejaEncontrada = (
 /*
     Aquí asumimos que no son pareja y las volvemos a poner boca abajo
   */
-const parejaNoEncontrada = (
+export const parejaNoEncontrada = (
   tablero: Tablero,
   indiceA: number,
   indiceB: number
