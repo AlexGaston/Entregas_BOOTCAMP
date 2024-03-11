@@ -39,12 +39,14 @@ export const infoCartas: InfoCarta[] = [
   },
 ];
 
+/*NO ESTOY LO ESTOY UTILIZANDO????
 const crearCartaInicial = (idFoto: number, imagen: string): Carta => ({
   idFoto,
   imagen,
   estaVuelta: false,
   encontrada: false,
 });
+*/
 
 export const crearColeccionDeCartasInicial = (
   infoCartas: InfoCarta[]

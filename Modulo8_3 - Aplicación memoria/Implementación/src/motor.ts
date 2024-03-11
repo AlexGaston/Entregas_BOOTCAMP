@@ -1,12 +1,16 @@
 import {
   Carta,
-  cartas,
-  tablero,
   Tablero,
   crearColeccionDeCartasInicial,
   infoCartas,
 } from "./modelo";
 
+import {
+  voltearParejaNoCorrecta,
+  pintarParejasEncontradas,
+  voltearCartasPartidaNueva,
+  borrarMensajesPartida,
+} from "./ui";
 /*
 En el motor nos va a hacer falta un método para barajar cartas
 */
@@ -93,10 +97,7 @@ export const sonPareja = (
   indiceB: number,
   tablero: Tablero
 ): boolean => {
-  if (tablero.cartas[indiceA].idFoto === tablero.cartas[indiceB].idFoto) {
-    return true;
-  }
-  return false;
+  return tablero.cartas[indiceA].idFoto === tablero.cartas[indiceB].idFoto;
 };
 
 /*
@@ -139,36 +140,6 @@ const parejaNoEncontrada = (
   tablero.cartas[indiceB].estaVuelta = false;
 };
 
-const voltearParejaNoCorrecta = (
-  tablero: Tablero,
-  indiceA: number,
-  indiceB: number
-) => {
-  if (
-    tablero.cartas[indiceA].idFoto !== tablero.cartas[indiceB].idFoto &&
-    tablero.estadoPartida === "CeroCartasLevantadas"
-  ) {
-    setTimeout(() => {
-      const dataIndiceIdA = `[data-indice-id="carta${indiceA}"]`;
-      const cartaImagenA = document.querySelector(`img${dataIndiceIdA}`);
-      const dataIndiceIdB = `[data-indice-id="carta${indiceB}"]`;
-      const cartaImagenB = document.querySelector(`img${dataIndiceIdB}`);
-      if (
-        cartaImagenA !== null &&
-        cartaImagenA !== undefined &&
-        cartaImagenA instanceof HTMLImageElement &&
-        cartaImagenB !== null &&
-        cartaImagenB !== undefined &&
-        cartaImagenB instanceof HTMLImageElement
-      ) {
-        console.log("VOLTEAR PAREJA INCORRECTA");
-        cartaImagenA.src = "./src/img/back.png";
-        cartaImagenB.src = "./src/img/back.png";
-      }
-    }, 1000);
-  }
-};
-
 /*
     Esto lo podemos comprobar o bien utilizando every, o bien utilizando un contador (cartasEncontradas)
   
@@ -176,33 +147,7 @@ const voltearParejaNoCorrecta = (
     //...
   }*/
 
-let numeroParejasEncontradas: number = 0;
-
-const pintarParejasEncontradas = () => {
-  const resultado = document.getElementById("parejasEncontradas");
-  const mensajePartida = document.getElementById("mensajePartida");
-
-  if (
-    resultado !== null &&
-    resultado !== undefined &&
-    resultado instanceof HTMLElement
-  ) {
-    resultado.innerHTML = String(numeroParejasEncontradas);
-  }
-
-  if (numeroParejasEncontradas === 6) {
-    tablero.estadoPartida = "PartidaCompleta";
-    console.log("PARTICA ACABADA!!!!");
-    if (
-      mensajePartida !== null &&
-      mensajePartida !== undefined &&
-      mensajePartida instanceof HTMLDivElement
-    ) {
-      mensajePartida.innerHTML =
-        "Enhorabuena has encontrado todas las parejas!!!!";
-    }
-  }
-};
+export let numeroParejasEncontradas: number = 0;
 
 /*
   Iniciar partida: Crear el tablero inicial y Barajar las cartas
@@ -218,39 +163,4 @@ export const iniciaPartida = (tablero: Tablero): void => {
   voltearCartasPartidaNueva(tablero);
   numeroParejasEncontradas = 0;
   borrarMensajesPartida();
-};
-
-const voltearCartasPartidaNueva = (tablero: Tablero) => {
-  for (let i = 0; i < tablero.cartas.length; i++) {
-    const dataIndiceId = `[data-indice-id="carta${i}"]`;
-    const cartaImagen = document.querySelector(`img${dataIndiceId}`);
-    if (
-      cartaImagen !== null &&
-      cartaImagen !== undefined &&
-      cartaImagen instanceof HTMLImageElement
-    ) {
-      cartaImagen.src = "./src/img/back.png";
-    }
-  }
-};
-
-const borrarMensajesPartida = () => {
-  const resultado = document.getElementById("parejasEncontradas");
-  const mensajePartida = document.getElementById("mensajePartida");
-
-  if (
-    resultado !== null &&
-    resultado !== undefined &&
-    resultado instanceof HTMLElement
-  ) {
-    resultado.innerHTML = String(0);
-  }
-
-  if (
-    mensajePartida !== null &&
-    mensajePartida !== undefined &&
-    mensajePartida instanceof HTMLDivElement
-  ) {
-    mensajePartida.innerHTML = " ";
-  }
 };

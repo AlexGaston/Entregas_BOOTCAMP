@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { cartas, infoCartas, tablero } from "./modelo";
+import { tablero } from "./modelo";
 import { iniciaPartida } from "./motor";
 import { girarCarta } from "./ui";
 
