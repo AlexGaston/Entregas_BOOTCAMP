@@ -61,6 +61,10 @@ export const voltearLaCarta = (tablero: Tablero, indice: number): void => {
   }
   tablero.cartas[indice].estaVuelta = true;
 
+  mirarSiLaSegundaCartaEspareja(tablero);
+};
+
+const mirarSiLaSegundaCartaEspareja = (tablero: Tablero) => {
   if (
     tablero.indiceCartaVolteadaA !== undefined &&
     tablero.indiceCartaVolteadaB !== undefined
