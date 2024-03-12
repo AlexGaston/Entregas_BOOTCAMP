@@ -1,8 +1,8 @@
 import "./style.css";
 
 import { tablero } from "./modelo";
-import { iniciaPartida } from "./motor";
-import { girarCarta } from "./ui";
+//import { iniciaPartida } from "./motor";
+import { girarCarta, nuevaPartida } from "./ui";
 
 // Boton iniciar Partida
 const botonInicioPartida = document.getElementById("iniciaPartida");
@@ -11,7 +11,7 @@ if (
   botonInicioPartida !== undefined &&
   botonInicioPartida instanceof HTMLButtonElement
 ) {
-  botonInicioPartida.addEventListener("click", () => iniciaPartida(tablero));
+  botonInicioPartida.addEventListener("click", () => nuevaPartida(tablero));
 }
 
 // Creando los elementos del tablero

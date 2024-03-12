@@ -6,11 +6,13 @@ import {
   sonPareja,
   parejaEncontrada,
   parejaNoEncontrada,
+  iniciaPartida,
 } from "./motor";
 
 export const girarCarta = (tablero: Tablero, indice: number) => {
   if (sePuedeVoltearLaCarta(tablero, indice)) {
     voltearLaCarta(tablero, indice);
+    mirarSiLaSegundaCartaEspareja(tablero);
     cambiarImagenCarta(indice);
     console.log(tablero);
   }
@@ -30,34 +32,29 @@ const cambiarImagenCarta = (indice: number) => {
   }
 };
 
-export const voltearParejaNoCorrecta = (
-  tablero: Tablero,
-  indiceA: number,
-  indiceB: number
-) => {
-  if (
-    tablero.cartas[indiceA].idFoto !== tablero.cartas[indiceB].idFoto &&
-    tablero.estadoPartida === "CeroCartasLevantadas"
-  ) {
-    setTimeout(() => {
-      const dataIndiceIdA = `[data-indice-id="carta${indiceA}"]`;
-      const cartaImagenA = document.querySelector(`img${dataIndiceIdA}`);
-      const dataIndiceIdB = `[data-indice-id="carta${indiceB}"]`;
-      const cartaImagenB = document.querySelector(`img${dataIndiceIdB}`);
-      if (
-        cartaImagenA !== null &&
-        cartaImagenA !== undefined &&
-        cartaImagenA instanceof HTMLImageElement &&
-        cartaImagenB !== null &&
-        cartaImagenB !== undefined &&
-        cartaImagenB instanceof HTMLImageElement
-      ) {
-        console.log("VOLTEAR PAREJA INCORRECTA");
-        cartaImagenA.src = "./src/img/back.png";
-        cartaImagenB.src = "./src/img/back.png";
+export const voltearParejaNoCorrecta = (tablero: Tablero) => {
+  setTimeout(() => {
+    for (let i = 0; i < tablero.cartas.length; i++) {
+      if (!tablero.cartas[i].encontrada && !tablero.cartas[i].estaVuelta) {
+        const dataIndiceIdA = `[data-indice-id="carta${i}"]`;
+        const cartaImagenA = document.querySelector(`img${dataIndiceIdA}`);
+        const dataIndiceIdB = `[data-indice-id="carta${i}"]`;
+        const cartaImagenB = document.querySelector(`img${dataIndiceIdB}`);
+        if (
+          cartaImagenA !== null &&
+          cartaImagenA !== undefined &&
+          cartaImagenA instanceof HTMLImageElement &&
+          cartaImagenB !== null &&
+          cartaImagenB !== undefined &&
+          cartaImagenB instanceof HTMLImageElement
+        ) {
+          console.log("VOLTEAR PAREJA INCORRECTA");
+          cartaImagenA.src = "./src/img/back.png";
+          cartaImagenB.src = "./src/img/back.png";
+        }
       }
-    }, 1000);
-  }
+    }
+  }, 1000);
 };
 
 export const pintarParejasEncontradas = () => {
@@ -138,12 +135,20 @@ export const mirarSiLaSegundaCartaEspareja = (tablero: Tablero) => {
         tablero.indiceCartaVolteadaA,
         tablero.indiceCartaVolteadaB
       );
+      pintarParejasEncontradas();
     } else {
       parejaNoEncontrada(
         tablero,
         tablero.indiceCartaVolteadaA,
         tablero.indiceCartaVolteadaB
       );
+      voltearParejaNoCorrecta(tablero);
     }
   }
+};
+
+export const nuevaPartida = (tablero: Tablero) => {
+  iniciaPartida(tablero);
+  voltearCartasPartidaNueva(tablero);
+  borrarMensajesPartida();
 };

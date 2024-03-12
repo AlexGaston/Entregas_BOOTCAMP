@@ -5,13 +5,6 @@ import {
   infoCartas,
 } from "./modelo";
 
-import {
-  voltearParejaNoCorrecta,
-  pintarParejasEncontradas,
-  voltearCartasPartidaNueva,
-  borrarMensajesPartida,
-  mirarSiLaSegundaCartaEspareja,
-} from "./ui";
 /*
 En el motor nos va a hacer falta un método para barajar cartas
 */
@@ -61,8 +54,6 @@ export const voltearLaCarta = (tablero: Tablero, indice: number): void => {
     tablero.estadoPartida = "DosCartasLevantadas";
   }
   tablero.cartas[indice].estaVuelta = true;
-
-  mirarSiLaSegundaCartaEspareja(tablero);
 };
 
 /*
@@ -94,7 +85,6 @@ export const parejaEncontrada = (
   tablero.indiceCartaVolteadaB = undefined;
   numeroParejasEncontradas = numeroParejasEncontradas + 1;
   console.log("Número de parejas encontradas: ", numeroParejasEncontradas);
-  pintarParejasEncontradas();
 };
 
 /*
@@ -111,7 +101,7 @@ export const parejaNoEncontrada = (
   tablero.estadoPartida = "CeroCartasLevantadas";
   tablero.indiceCartaVolteadaA = undefined;
   tablero.indiceCartaVolteadaB = undefined;
-  voltearParejaNoCorrecta(tablero, indiceA, indiceB);
+
   tablero.cartas[indiceA].estaVuelta = false;
   tablero.cartas[indiceB].estaVuelta = false;
 };
@@ -136,7 +126,5 @@ export const iniciaPartida = (tablero: Tablero): void => {
   tablero.cartas = [...cartaBarajadas];
   console.log("tablero.carta: ", tablero.cartas);
   tablero.estadoPartida = "PartidaNoIniciada";
-  voltearCartasPartidaNueva(tablero);
   numeroParejasEncontradas = 0;
-  borrarMensajesPartida();
 };
