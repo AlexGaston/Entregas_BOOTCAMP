@@ -32,6 +32,15 @@ const cambiarImagenCarta = (indice: number) => {
   }
 };
 
+const volverAvoltearPareja = (
+  cartaImagenA: HTMLImageElement,
+  cartaImagenB: HTMLImageElement
+) => {
+  console.log("VOLTEAR PAREJA INCORRECTA");
+  cartaImagenA.src = "./src/img/back.png";
+  cartaImagenB.src = "./src/img/back.png";
+};
+
 export const voltearParejaNoCorrecta = (tablero: Tablero) => {
   setTimeout(() => {
     for (let i = 0; i < tablero.cartas.length; i++) {
@@ -48,30 +57,19 @@ export const voltearParejaNoCorrecta = (tablero: Tablero) => {
           cartaImagenB !== undefined &&
           cartaImagenB instanceof HTMLImageElement
         ) {
-          console.log("VOLTEAR PAREJA INCORRECTA");
-          cartaImagenA.src = "./src/img/back.png";
-          cartaImagenB.src = "./src/img/back.png";
+          volverAvoltearPareja(cartaImagenA, cartaImagenB);
         }
       }
     }
   }, 1000);
 };
 
-export const pintarParejasEncontradas = () => {
-  const resultado = document.getElementById("parejasEncontradas");
+const pintarMensajePartidaAcabada = () => {
   const mensajePartida = document.getElementById("mensajePartida");
-
-  if (
-    resultado !== null &&
-    resultado !== undefined &&
-    resultado instanceof HTMLElement
-  ) {
-    resultado.innerHTML = String(numeroParejasEncontradas);
-  }
 
   if (numeroParejasEncontradas === 6) {
     tablero.estadoPartida = "PartidaCompleta";
-    console.log("PARTICA ACABADA!!!!");
+    console.log("PARTIDA ACABADA!!!!");
     if (
       mensajePartida !== null &&
       mensajePartida !== undefined &&
@@ -81,6 +79,19 @@ export const pintarParejasEncontradas = () => {
         "Enhorabuena has encontrado todas las parejas!!!!";
     }
   }
+};
+
+export const pintarParejasEncontradas = () => {
+  const resultado = document.getElementById("parejasEncontradas");
+
+  if (
+    resultado !== null &&
+    resultado !== undefined &&
+    resultado instanceof HTMLElement
+  ) {
+    resultado.innerHTML = String(numeroParejasEncontradas);
+  }
+  pintarMensajePartidaAcabada();
 };
 
 export const voltearCartasPartidaNueva = (tablero: Tablero) => {
@@ -97,9 +108,8 @@ export const voltearCartasPartidaNueva = (tablero: Tablero) => {
   }
 };
 
-export const borrarMensajesPartida = () => {
+const resetearContadorParejas = () => {
   const resultado = document.getElementById("parejasEncontradas");
-  const mensajePartida = document.getElementById("mensajePartida");
 
   if (
     resultado !== null &&
@@ -108,7 +118,12 @@ export const borrarMensajesPartida = () => {
   ) {
     resultado.innerHTML = String(0);
   }
+};
 
+export const borrarMensajesPartida = () => {
+  const mensajePartida = document.getElementById("mensajePartida");
+
+  resetearContadorParejas();
   if (
     mensajePartida !== null &&
     mensajePartida !== undefined &&
