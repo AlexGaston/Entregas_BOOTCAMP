@@ -32,36 +32,30 @@ const cambiarImagenCarta = (indice: number) => {
   }
 };
 
-const volverAvoltearPareja = (
-  cartaImagenA: HTMLImageElement,
-  cartaImagenB: HTMLImageElement
-) => {
+const volverAvoltearPareja = (cartaImagen: HTMLImageElement) => {
   console.log("VOLTEAR PAREJA INCORRECTA");
-  cartaImagenA.src = "./src/img/back.png";
-  cartaImagenB.src = "./src/img/back.png";
+  cartaImagen.src = "./src/img/back.png";
 };
 
 export const voltearParejaNoCorrecta = (tablero: Tablero) => {
   setTimeout(() => {
-    for (let i = 0; i < tablero.cartas.length; i++) {
+    for (let i = 0; i < tablero.cartas.length; i++)
       if (!tablero.cartas[i].encontrada && !tablero.cartas[i].estaVuelta) {
-        const dataIndiceIdA = `[data-indice-id="carta${i}"]`;
-        const cartaImagenA = document.querySelector(`img${dataIndiceIdA}`);
-        const dataIndiceIdB = `[data-indice-id="carta${i}"]`;
-        const cartaImagenB = document.querySelector(`img${dataIndiceIdB}`);
-        if (
-          cartaImagenA !== null &&
-          cartaImagenA !== undefined &&
-          cartaImagenA instanceof HTMLImageElement &&
-          cartaImagenB !== null &&
-          cartaImagenB !== undefined &&
-          cartaImagenB instanceof HTMLImageElement
-        ) {
-          volverAvoltearPareja(cartaImagenA, cartaImagenB);
-        }
+        darlaVueltaALaCarta(i);
       }
-    }
   }, 1000);
+};
+
+const darlaVueltaALaCarta = (indice: number) => {
+  const dataIndice = `[data-indice-id="carta${indice}"]`;
+  const cartaImagen = document.querySelector(`img${dataIndice}`);
+  if (
+    cartaImagen !== null &&
+    cartaImagen !== undefined &&
+    cartaImagen instanceof HTMLImageElement
+  ) {
+    volverAvoltearPareja(cartaImagen);
+  }
 };
 
 const pintarMensajePartidaAcabada = () => {

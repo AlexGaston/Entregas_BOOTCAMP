@@ -43,10 +43,7 @@ export const sePuedeVoltearLaCarta = (
 };
 
 export const voltearLaCarta = (tablero: Tablero, indice: number): void => {
-  if (
-    tablero.estadoPartida === "CeroCartasLevantadas" ||
-    tablero.estadoPartida === "PartidaNoIniciada"
-  ) {
+  if (tablero.estadoPartida === "CeroCartasLevantadas") {
     tablero.indiceCartaVolteadaA = indice;
     tablero.estadoPartida = "UnaCartaLevantada";
   } else if (tablero.estadoPartida === "UnaCartaLevantada") {
@@ -125,6 +122,6 @@ export const iniciaPartida = (tablero: Tablero): void => {
   );
   tablero.cartas = [...cartaBarajadas];
   console.log("tablero.carta: ", tablero.cartas);
-  tablero.estadoPartida = "PartidaNoIniciada";
+  tablero.estadoPartida = "CeroCartasLevantadas";
   numeroParejasEncontradas = 0;
 };

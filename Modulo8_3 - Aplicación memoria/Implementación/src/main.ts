@@ -14,16 +14,24 @@ if (
   botonInicioPartida.addEventListener("click", () => nuevaPartida(tablero));
 }
 
-// Creando los elementos del tablero
-for (let i = 0; i < tablero.cartas.length; i++) {
-  const dataIndiceId = `[data-indice-id="carta${i}"]`;
-  const elementoDiv = document.querySelector(`div${dataIndiceId}`);
+const mapearTablero = () => {
+  // Creando los elementos del tablero
+  for (let i = 0; i < tablero.cartas.length; i++) {
+    const dataIndiceId = `[data-indice-id="carta${i}"]`;
+    const elementoDiv = document.querySelector(`div${dataIndiceId}`);
 
-  if (
-    elementoDiv !== null &&
-    elementoDiv !== undefined &&
-    elementoDiv instanceof HTMLDivElement
-  ) {
-    elementoDiv.addEventListener("click", () => girarCarta(tablero, i));
+    if (
+      elementoDiv !== null &&
+      elementoDiv !== undefined &&
+      elementoDiv instanceof HTMLDivElement
+    ) {
+      elementoDiv.addEventListener("click", () => {
+        if (tablero.estadoPartida !== "PartidaNoIniciada") {
+          girarCarta(tablero, i);
+        }
+      });
+    }
   }
-}
+};
+
+document.addEventListener("DOMContentLoaded", mapearTablero);
