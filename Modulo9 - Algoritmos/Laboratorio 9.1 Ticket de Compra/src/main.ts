@@ -263,6 +263,54 @@ console.log(
   calcularTotalIvaGeneral(resultadoLineasTicketProducto)
 );
 
+let ivasuperreducidoCTotal: TotalPorTipoIva = {
+  tipoIva: "superreducidoC",
+  cuantia: 0,
+};
+
+const calcularTotalIvaSuperReducidoC = (
+  resultadoLineasTicketProducto: ResultadoLineaTicket[]
+): TotalPorTipoIva => {
+  for (let i = 0; i < resultadoLineasTicketProducto.length; i++) {
+    if (resultadoLineasTicketProducto[i].tipoIva === "superreducidoC") {
+      ivasuperreducidoCTotal.cuantia =
+        ivasuperreducidoCTotal.cuantia +
+        resultadoLineasTicketProducto[i].precioConIva -
+        resultadoLineasTicketProducto[i].precioSinIva;
+    }
+  }
+  return ivasuperreducidoCTotal;
+};
+
+console.log(
+  "Total iva Super Reducido C: ",
+  calcularTotalIvaSuperReducidoC(resultadoLineasTicketProducto)
+);
+
+let ivasuperreducidoATotal: TotalPorTipoIva = {
+  tipoIva: "superreducidoA",
+  cuantia: 0,
+};
+
+const calcularTotalIvaSuperReducidoA = (
+  resultadoLineasTicketProducto: ResultadoLineaTicket[]
+): TotalPorTipoIva => {
+  for (let i = 0; i < resultadoLineasTicketProducto.length; i++) {
+    if (resultadoLineasTicketProducto[i].tipoIva === "superreducidoA") {
+      ivasuperreducidoATotal.cuantia =
+        ivasuperreducidoATotal.cuantia +
+        resultadoLineasTicketProducto[i].precioConIva -
+        resultadoLineasTicketProducto[i].precioSinIva;
+    }
+  }
+  return ivasuperreducidoATotal;
+};
+
+console.log(
+  "Total iva Super Reducido A: ",
+  calcularTotalIvaSuperReducidoA(resultadoLineasTicketProducto)
+);
+
 //---------------------------------------------------------IMPRIMIR
 
 const mostrarProductosEnPagina = (producto: string) => {
