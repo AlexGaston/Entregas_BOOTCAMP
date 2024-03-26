@@ -9,6 +9,7 @@ import {
   Producto,
   ResultadoLineaTicket,
   ResultadoTotalTicket,
+  TicketFinal,
   TotalPorTipoIva,
 } from "./ticketCompra/model";
 
@@ -310,6 +311,38 @@ console.log(
   "Total iva Super Reducido A: ",
   calcularTotalIvaSuperReducidoA(resultadoLineasTicketProducto)
 );
+
+let totalesIva: TotalPorTipoIva[] = [];
+
+const totalesIvaTicket = (
+  resultadoLineasTicketProducto: ResultadoLineaTicket[]
+): TotalPorTipoIva[] => {
+  for (let i = 0; i < resultadoLineasTicketProducto.length; i++) {
+    if (resultadoLineasTicketProducto[i].tipoIva === "general") {
+      totalesIva.push(calcularTotalIvaGeneral(resultadoLineasTicketProducto));
+    } else {
+      if (resultadoLineasTicketProducto[i].tipoIva === "superreducidoA") {
+        totalesIva.push(
+          calcularTotalIvaSuperReducidoA(resultadoLineasTicketProducto)
+        );
+      }
+    }
+  }
+  return totalesIva;
+};
+
+// Calcular el ticket final
+
+const calcularTicketFinal = (): TicketFinal => {
+  const ticketFinal = {
+    lineas: resultadoLineasTicketProducto,
+    total: totalesTicket(resultadoLineasTicketProducto),
+    desgloseIva: totalesIvaTicket(resultadoLineasTicketProducto),
+  };
+  return ticketFinal;
+};
+
+console.log("Ticket Final: ", calcularTicketFinal());
 
 //---------------------------------------------------------IMPRIMIR
 
