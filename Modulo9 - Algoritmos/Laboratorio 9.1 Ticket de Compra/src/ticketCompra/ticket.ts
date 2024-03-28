@@ -46,7 +46,7 @@ export const productos: LineaTicket[] = [
   },
 ];
 
-let tiquetFinaldeCompra: ResultadoLineaTicket[] = [];
+export let resultadoLineasTicketProducto: ResultadoLineaTicket[] = [];
 
 export const calculaTicket = (productos: LineaTicket[]) => {
   for (let i = 0; i < productos.length; i++) {
@@ -59,19 +59,19 @@ export const calculaTicket = (productos: LineaTicket[]) => {
         calcularPrecioProductoConIva(productos[i].producto) *
         productos[i].cantidad, //Tenemos en cuenta la cantidad de producto
     };
-    tiquetFinaldeCompra.push(lineaProducto);
+    resultadoLineasTicketProducto.push(lineaProducto);
   }
 };
 
-const totalesTicket = (
+export const totalesTicket = (
   resultadoLineasTicketProducto: ResultadoLineaTicket[]
 ): ResultadoTotalTicket => {
-  const resultados = {
+  const resultadosTotalesTicket = {
     totalSinIva: calcularPrecioTotalSinIVA(resultadoLineasTicketProducto),
     totalConIva: calcularPrecioTotalConIva(resultadoLineasTicketProducto),
     totalIva: Number(
       calcularTotalIva(resultadoLineasTicketProducto).toFixed(2)
     ),
   };
-  return resultados;
+  return resultadosTotalesTicket;
 };

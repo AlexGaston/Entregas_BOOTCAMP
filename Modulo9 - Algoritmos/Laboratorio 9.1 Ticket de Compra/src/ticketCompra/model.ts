@@ -44,3 +44,29 @@ export interface TotalPorTipoIva {
   tipoIva: TipoIva;
   cuantia: number;
 }
+
+export let ivaGeneralTotal: TotalPorTipoIva = {
+  tipoIva: "general",
+  cuantia: 0,
+};
+
+export let ivasuperreducidoATotal: TotalPorTipoIva = {
+  tipoIva: "superreducidoA",
+  cuantia: 0,
+};
+
+export let ivasuperreducidoBTotal: TotalPorTipoIva = {
+  tipoIva: "superreducidoB",
+  cuantia: 0,
+};
+
+export let ivasuperreducidoCTotal: TotalPorTipoIva = {
+  tipoIva: "superreducidoC",
+  cuantia: 0,
+};
+
+export interface TicketFinal {
+  lineas: ResultadoLineaTicket[];
+  total: ResultadoTotalTicket;
+  desgloseIva: TotalPorTipoIva[];
+}
