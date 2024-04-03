@@ -46,9 +46,11 @@ export const productos: LineaTicket[] = [
   },
 ];
 
-export let resultadoLineasTicketProducto: ResultadoLineaTicket[] = [];
+export const calculaTicket = (
+  productos: LineaTicket[]
+): ResultadoLineaTicket[] => {
+  let resultadoLineasTicketProducto: ResultadoLineaTicket[] = [];
 
-export const calculaTicket = (productos: LineaTicket[]) => {
   for (let i = 0; i < productos.length; i++) {
     let lineaProducto = {
       nombre: productos[i].producto.nombre,
@@ -61,6 +63,7 @@ export const calculaTicket = (productos: LineaTicket[]) => {
     };
     resultadoLineasTicketProducto.push(lineaProducto);
   }
+  return resultadoLineasTicketProducto;
 };
 
 export const totalesTicket = (

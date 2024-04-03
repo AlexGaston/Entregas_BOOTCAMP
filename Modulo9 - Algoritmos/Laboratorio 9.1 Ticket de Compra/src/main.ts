@@ -1,18 +1,8 @@
 import "./style.css";
 
-import {
-  resultadoLineasTicketProducto,
-  calculaTicket,
-  totalesTicket,
-} from "./ticketCompra/ticket";
+import { calculaTicket, totalesTicket } from "./ticketCompra/ticket";
 
-import {
-  calcularTotalIvaGeneral,
-  calcularTotalIvaSuperReducidoA,
-  calcularTotalIvaSuperReducidoB,
-  calcularTotalIvaSuperReducidoC,
-  totalesIvaTicket,
-} from "./ticketCompra/ticket-helper";
+import { totalesIvaTicket } from "./ticketCompra/ticket-helper";
 
 import { LineaTicket, TicketFinal } from "./ticketCompra/model";
 
@@ -42,53 +32,19 @@ export const productos: LineaTicket[] = [
     },
     cantidad: 6,
   },
-  {
+  /*{
     producto: {
       nombre: "Lasaña",
       precio: 5,
       tipoIva: "superreducidoA",
     },
     cantidad: 1,
-  },
+  },*/
 ];
 
-calculaTicket(productos);
-//desgloseTipoIva(productos);
-calcularTotalIvaGeneral(resultadoLineasTicketProducto);
-calcularTotalIvaSuperReducidoA(resultadoLineasTicketProducto);
-calcularTotalIvaSuperReducidoB(resultadoLineasTicketProducto);
-calcularTotalIvaSuperReducidoC(resultadoLineasTicketProducto);
+const calcularTicketFinal = (productos: LineaTicket[]): TicketFinal => {
+  const resultadoLineasTicketProducto = calculaTicket(productos);
 
-console.log("1 - Estructira calculaTicket: ", resultadoLineasTicketProducto);
-
-console.log(
-  "2 - Resultados totales tiquet: ",
-  totalesTicket(resultadoLineasTicketProducto)
-);
-
-/*console.log(
-  "3 - Total iva General ",
-  calcularTotalIvaGeneral(resultadoLineasTicketProducto)
-);
-
-console.log(
-  "4 - Total iva Super Reducido A: ",
-  calcularTotalIvaSuperReducidoA(resultadoLineasTicketProducto)
-);
-
-console.log(
-  "5 - Total iva Super Reducido B: ",
-  calcularTotalIvaSuperReducidoB(resultadoLineasTicketProducto)
-);
-
-console.log(
-  "6 - Total iva Super Reducido C: ",
-  calcularTotalIvaSuperReducidoC(resultadoLineasTicketProducto)
-);*/
-
-// Calcular el ticket final
-
-const calcularTicketFinal = (): TicketFinal => {
   const ticketFinal = {
     lineas: resultadoLineasTicketProducto,
     total: totalesTicket(resultadoLineasTicketProducto),
@@ -97,7 +53,7 @@ const calcularTicketFinal = (): TicketFinal => {
   return ticketFinal;
 };
 
-console.log("Ticket Final: ", calcularTicketFinal());
+console.log("Ticket Final: ", calcularTicketFinal(productos));
 
 //---------------------------------------------------------IMPRIMIR
 /*
