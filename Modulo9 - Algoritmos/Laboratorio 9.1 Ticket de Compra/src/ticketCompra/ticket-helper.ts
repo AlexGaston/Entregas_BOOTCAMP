@@ -201,7 +201,13 @@ export const totalesIvaTicket = (
   return totalesIva;
 };
 
-//const totalesFinalesIva = ()
+/*const totalesFinalesIva = (totalesIva: TotalPorTipoIva[]): TotalPorTipoIva[] => {
+  for (let i=0; i<totalesIva.length; i++){
+    if(totalesIva[i].tipoIva === "general"){
+      
+    }
+  }
+}*/
 
 /*
 export const desgloseTipoIva = (productos: LineaTicket[]) => {
