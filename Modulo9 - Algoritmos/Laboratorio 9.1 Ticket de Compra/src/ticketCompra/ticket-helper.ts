@@ -75,7 +75,7 @@ export const calcularTotalIva = (
   );
 };
 
-export const calcularTipoIva = (
+/*export const calcularTipoIva = (
   resultadoLineasTicketProducto: ResultadoLineaTicket,
   tipoDeIva: TipoIva
 ): TotalPorTipoIva => {
@@ -88,7 +88,7 @@ export const calcularTipoIva = (
     resultadoLineasTicketProducto.precioSinIva;
 
   return iva;
-};
+};*/
 /*
 export const calcularTotalIvaSuperReducidoA = (
   resultadoLineasTicketProducto: ResultadoLineaTicket[]
@@ -130,8 +130,8 @@ export const calcularTotalIvaSuperReducidoC = (
 };
 */
 
-let totalesIva: TotalPorTipoIva[] = [];
-export const totalesIvaTicket = (
+export let totalesIva: TotalPorTipoIva[] = [];
+/*export const totalesIvaTicket = (
   resultadoLineasTicketProducto: ResultadoLineaTicket[]
 ): TotalPorTipoIva[] => {
   //let totalesIva: TotalPorTipoIva[] = [];
@@ -199,42 +199,26 @@ export const totalesIvaTicket = (
     }
   }
   return totalesIva;
-};
-
-/*const totalesFinalesIva = (totalesIva: TotalPorTipoIva[]): TotalPorTipoIva[] => {
-  for (let i=0; i<totalesIva.length; i++){
-    if(totalesIva[i].tipoIva === "general"){
-      
-    }
-  }
-}*/
-
-/*
-export const desgloseTipoIva = (productos: LineaTicket[]) => {
-  let totalIvaReducido = 0;
-  let totalIvaSuperReducidoA = 0;
-  let totalIvaSuperReducidoB = 0;
-  let totalIvaSuperReducidoC = 0;
-
-  for (let i = 0; i < productos.length; i++) {
-    if (productos[i].producto.tipoIva === "general") {
-      totalIvaGeneral = totalIvaGeneral + calcularElIva(productos[i].producto);
-    }
-    if (productos[i].producto.tipoIva === "reducido") {
-      totalIvaReducido =
-        totalIvaReducido + calcularElIva(productos[i].producto);
-    }
-    if (productos[i].producto.tipoIva === "superreducidoA") {
-      totalIvaSuperReducidoA =
-        totalIvaSuperReducidoA + calcularElIva(productos[i].producto);
-    }
-    if (productos[i].producto.tipoIva === "superreducidoB") {
-      totalIvaSuperReducidoB =
-        totalIvaSuperReducidoB + calcularElIva(productos[i].producto);
-    }
-    if (productos[i].producto.tipoIva === "superreducidoC") {
-      totalIvaSuperReducidoC =
-        totalIvaSuperReducidoC + calcularElIva(productos[i].producto);
-    }
-  }
 };*/
+
+export const totalesIvaTicket = (
+  resultadoLineasTicketProducto: ResultadoLineaTicket[]
+): TotalPorTipoIva[] => {
+  const totalesPorIVA: { [tipoIva: string]: number } = {};
+  resultadoLineasTicketProducto.forEach((resultadoLineasTicketProducto) => {
+    //const { tipoIva, precioConIva, precioSinIva } =
+    //resultadoLineasTicketProducto;
+    const diferenciaIva =
+      resultadoLineasTicketProducto.precioConIva -
+      resultadoLineasTicketProducto.precioSinIva;
+    totalesPorIVA[resultadoLineasTicketProducto.tipoIva] =
+      (totalesPorIVA[resultadoLineasTicketProducto.tipoIva] || 0) +
+      diferenciaIva;
+  });
+  console.log(totalesPorIVA);
+
+  return Object.keys(totalesPorIVA).map((tipoIVA) => ({
+    tipoIva: tipoIVA as TipoIva,
+    cuantia: totalesPorIVA[tipoIVA] || 0,
+  }));
+};
