@@ -32,14 +32,14 @@ export const productos: LineaTicket[] = [
     },
     cantidad: 6,
   },
-  /*{
+  {
     producto: {
       nombre: "Lasaña",
       precio: 5,
       tipoIva: "superreducidoA",
     },
     cantidad: 1,
-  },*/
+  },
 ];
 
 const calcularTicketFinal = (productos: LineaTicket[]): TicketFinal => {

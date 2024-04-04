@@ -129,10 +129,12 @@ export const calcularTotalIvaSuperReducidoC = (
   return ivasuperreducidoCTotal;
 };
 */
+
+let totalesIva: TotalPorTipoIva[] = [];
 export const totalesIvaTicket = (
   resultadoLineasTicketProducto: ResultadoLineaTicket[]
 ): TotalPorTipoIva[] => {
-  let totalesIva: TotalPorTipoIva[] = [];
+  //let totalesIva: TotalPorTipoIva[] = [];
 
   let ivaGeneralTotal: TotalPorTipoIva = {
     tipoIva: "general",
@@ -198,6 +200,9 @@ export const totalesIvaTicket = (
   }
   return totalesIva;
 };
+
+//const totalesFinalesIva = ()
+
 /*
 export const desgloseTipoIva = (productos: LineaTicket[]) => {
   let totalIvaReducido = 0;
