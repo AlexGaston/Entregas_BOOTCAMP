@@ -207,7 +207,8 @@ export const totalesIvaTicket = (
   const totalesPorIVA: { [tipoIva: string]: number } = {};
   resultadoLineasTicketProducto.forEach((resultadoLineasTicketProducto) => {
     //const { tipoIva, precioConIva, precioSinIva } =
-    //resultadoLineasTicketProducto;
+    //
+    resultadoLineasTicketProducto;
     const diferenciaIva =
       resultadoLineasTicketProducto.precioConIva -
       resultadoLineasTicketProducto.precioSinIva;
