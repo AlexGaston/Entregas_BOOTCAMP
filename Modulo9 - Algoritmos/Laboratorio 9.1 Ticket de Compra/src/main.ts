@@ -2,13 +2,9 @@ import "./style.css";
 
 import { calculaTicket, totalesTicket } from "./ticketCompra/ticket";
 
-import { totalesIva, totalesIvaTicket } from "./ticketCompra/ticket-helper";
+import { totalesIvaTicket } from "./ticketCompra/ticket-helper";
 
-import {
-  LineaTicket,
-  TicketFinal,
-  TotalPorTipoIva,
-} from "./ticketCompra/model";
+import { LineaTicket, TicketFinal } from "./ticketCompra/model";
 
 //Productos de entrada:
 export const productos: LineaTicket[] = [
@@ -83,6 +79,7 @@ for (let i = 0; i < productos.length; i++) {
   mostrarProductosEnPagina(productos[i].producto.nombre);
 }*/
 
+/* PRIMERA VERSION totalesFinalesIva:
 const totalesFinalesIva = (totalesIva: TotalPorTipoIva[]) => {
   const ivasFinalesUnificados: TotalPorTipoIva[] = [];
 
@@ -144,4 +141,4 @@ const totalesFinalesIva = (totalesIva: TotalPorTipoIva[]) => {
   return ivasFinalesUnificados;
 };
 
-console.log("Totales finales de IVA: ", totalesFinalesIva(totalesIva));
+console.log("Totales finales de IVA: ", totalesFinalesIva(totalesIva));*/

@@ -1,5 +1,11 @@
-import { Producto } from "./model";
-import { calcularElIva, calcularPrecioProductoConIva } from "./ticket-helper";
+import { Producto, ResultadoLineaTicket } from "./model";
+import {
+  calcularElIva,
+  calcularPrecioProductoConIva,
+  calcularPrecioTotalConIva,
+  calcularPrecioTotalSinIVA,
+  calcularTotalIva,
+} from "./ticket-helper";
 
 describe("calcularElIva", () => {
   it("Producto con precio de 2 y un IVA general ---> Debería devolver un iva de 0.42", () => {
@@ -86,5 +92,104 @@ describe("calcularPrecioProductoConIva", () => {
 
     //Assert or THEN
     expect(result).toBe(5.25);
+  });
+});
+
+describe("calcularPrecioTotalSinIVA", () => {
+  it("Teniendo una linea de productos donde los precios sin Iva son: 4, 60 y 6 --> el Precio total sin Iva debería ser 70", () => {
+    //Arrange or GIVEN
+    const lineasProducto: ResultadoLineaTicket[] = [
+      {
+        nombre: "Legumbres",
+        cantidad: 2,
+        precioSinIva: 4,
+        tipoIva: "general",
+        precioConIva: 4.84,
+      },
+      {
+        nombre: "Perfume",
+        cantidad: 3,
+        precioSinIva: 60,
+        tipoIva: "general",
+        precioConIva: 72.6,
+      },
+      {
+        nombre: "Leche",
+        cantidad: 6,
+        precioSinIva: 6,
+        tipoIva: "superreducidoC",
+        precioConIva: 6,
+      },
+    ];
+    //Act or WHEN
+    const result = calcularPrecioTotalSinIVA(lineasProducto);
+    //Assert or THEN
+    expect(result).toEqual(70);
+  });
+});
+
+describe("calcularPrecioTotalConIva", () => {
+  it("Teniendo una linea de productos donde los precios con Iva son: 4.84, 72.6 y 6 --> el Precio total con Iva debería ser 83.44", () => {
+    //Arrange or GIVEN
+    const lineasProducto: ResultadoLineaTicket[] = [
+      {
+        nombre: "Legumbres",
+        cantidad: 2,
+        precioSinIva: 4,
+        tipoIva: "general",
+        precioConIva: 4.84,
+      },
+      {
+        nombre: "Perfume",
+        cantidad: 3,
+        precioSinIva: 60,
+        tipoIva: "general",
+        precioConIva: 72.6,
+      },
+      {
+        nombre: "Leche",
+        cantidad: 6,
+        precioSinIva: 6,
+        tipoIva: "superreducidoC",
+        precioConIva: 6,
+      },
+    ];
+    //Act or WHEN
+    const result = calcularPrecioTotalConIva(lineasProducto);
+    //Assert or THEN
+    expect(result).toEqual(83.44);
+  });
+});
+
+describe("calcularTotalIva", () => {
+  it("Teniendo un linea de producto donde el PrecioTotalConIva: 83.44 y el PrecioTotalSinIva: 70 --> El Total de iva debería ser 13.44", () => {
+    //Arrange or GIVEN
+    const lineasProducto: ResultadoLineaTicket[] = [
+      {
+        nombre: "Legumbres",
+        cantidad: 2,
+        precioSinIva: 4,
+        tipoIva: "general",
+        precioConIva: 4.84,
+      },
+      {
+        nombre: "Perfume",
+        cantidad: 3,
+        precioSinIva: 60,
+        tipoIva: "general",
+        precioConIva: 72.6,
+      },
+      {
+        nombre: "Leche",
+        cantidad: 6,
+        precioSinIva: 6,
+        tipoIva: "superreducidoC",
+        precioConIva: 6,
+      },
+    ];
+    //Act or WHEN
+    const result = calcularTotalIva(lineasProducto);
+    //Arrange or THEN
+    expect(result).toEqual(13.44);
   });
 });

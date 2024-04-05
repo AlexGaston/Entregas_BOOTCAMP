@@ -72,9 +72,7 @@ export const totalesTicket = (
   const resultadosTotalesTicket = {
     totalSinIva: calcularPrecioTotalSinIVA(resultadoLineasTicketProducto),
     totalConIva: calcularPrecioTotalConIva(resultadoLineasTicketProducto),
-    totalIva: Number(
-      calcularTotalIva(resultadoLineasTicketProducto).toFixed(2)
-    ),
+    totalIva: Number(calcularTotalIva(resultadoLineasTicketProducto)),
   };
   return resultadosTotalesTicket;
 };
