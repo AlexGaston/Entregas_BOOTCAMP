@@ -5,6 +5,7 @@ import {
   calcularPrecioTotalConIva,
   calcularPrecioTotalSinIVA,
   calcularTotalIva,
+  totalesIvaTicket,
 } from "./ticket-helper";
 
 describe("calcularElIva", () => {
@@ -191,5 +192,42 @@ describe("calcularTotalIva", () => {
     const result = calcularTotalIva(lineasProducto);
     //Arrange or THEN
     expect(result).toEqual(13.44);
+  });
+});
+
+describe("totalesIvaTicket", () => {
+  it("Teniendo una linea de producto con un IVA general 13,44 y un IVA Super Reducido A de 0.25 --> Deberia devolver [{tipoIva: 'general', cuantia: 13.44}, {tipoIva: 'superreducidoA', cuantia: 0.25}]", () => {
+    //Arrange or GIVEN
+    const lineasProducto: ResultadoLineaTicket[] = [
+      {
+        nombre: "Legumbres",
+        cantidad: 2,
+        precioSinIva: 4,
+        tipoIva: "general",
+        precioConIva: 4.84,
+      },
+      {
+        nombre: "Perfume",
+        cantidad: 3,
+        precioSinIva: 60,
+        tipoIva: "general",
+        precioConIva: 72.6,
+      },
+      {
+        nombre: "Lasaña",
+        cantidad: 1,
+        precioSinIva: 5,
+        tipoIva: "superreducidoA",
+        precioConIva: 5.25,
+      },
+    ];
+    //Act or WHEN
+    const result = totalesIvaTicket(lineasProducto);
+    //Assert or THEN
+    const expected = [
+      { tipoIva: "general", cuantia: 13.44 },
+      { tipoIva: "superreducidoA", cuantia: 0.25 },
+    ];
+    expect(result).toEqual(expected);
   });
 });

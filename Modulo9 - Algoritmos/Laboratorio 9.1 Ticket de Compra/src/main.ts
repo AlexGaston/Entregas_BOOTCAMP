@@ -58,6 +58,7 @@ const calcularTicketFinal = (productos: LineaTicket[]): TicketFinal => {
     total: totalesTicket(resultadoLineasTicketProducto),
     desgloseIva: totalesIvaTicket(resultadoLineasTicketProducto),
   };
+  console.log("DesgloseIva: ", totalesIvaTicket(resultadoLineasTicketProducto));
   return ticketFinal;
 };
 
