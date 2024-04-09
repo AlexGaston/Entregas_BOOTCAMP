@@ -3,7 +3,7 @@ import { ValidacionClave, commonPasswords } from "./Clave fuerte/model";
 
 // La clave no debe de contener palabras comunes (le pasaremos un array de palabras comunes).
 
-const clave = "nuevo";
+const clave = "nuevo123123";
 
 let validacionTienePalabrasComunes: ValidacionClave = {
   esValida: true,

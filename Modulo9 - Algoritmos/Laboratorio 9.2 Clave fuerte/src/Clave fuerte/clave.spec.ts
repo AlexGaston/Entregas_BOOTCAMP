@@ -4,6 +4,7 @@ import {
   tieneMayusculasYMinusculas,
   //tieneNombreUsuario,
   //tieneNumeros,
+  tienePalabrasComunes,
 } from "./clave";
 //import { ValidacionClave } from "./model";
 
@@ -158,3 +159,33 @@ describe("tieneNombreUsuario", () => {
     expect(result).toEqual(expected);
   });
 });*/
+
+describe("tienePalabrasComunes", () => {
+  it("Si tenemos una clave que contiene una palabra comun debería devolver --> {esValida: false, error: 'La clave no debe de contener palabras comunes' }", () => {
+    //Arrange or GIVEN
+    const clave = "nuevopassword";
+    const commonPasswords = ["password", "123456", "qwerty", "admin"];
+    //Act or WHEN
+    const result = tienePalabrasComunes(clave, commonPasswords);
+    //Assert or THEN
+    const expected = {
+      esValida: false,
+      error: "La clave no debe de contener palabras comunes",
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  it("Si tenemos una clave que NO contiene una palabra comun debería devolver --> {esValida: true}", () => {
+    //Arrange or GIVEN
+    const clave = "Alex";
+    const commonPasswords = ["password", "123456", "qwerty", "admin"];
+    //Act or WHEN
+    const result = tienePalabrasComunes(clave, commonPasswords);
+    //Assert or THEN
+    const expected = {
+      esValida: true,
+    };
+    expect(result).toEqual(expected);
+  });
+});

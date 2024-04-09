@@ -204,7 +204,7 @@ let validacionTienePalabrasComunes: ValidacionClave = {
   esValida: true,
 };
 
-const tienePalabrasComunes = (
+export const tienePalabrasComunes = (
   clave: string,
   commonPasswords: string[]
 ): ValidacionClave => {
