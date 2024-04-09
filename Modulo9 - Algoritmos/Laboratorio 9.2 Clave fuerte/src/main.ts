@@ -1,25 +1,26 @@
 import "./style.css";
 import { ValidacionClave } from "./Clave fuerte/model";
 
-console.log("Hello Typescript!!!");
-
-let clave = "palabraCl1ve";
+let clave = "palabraClave";
 const numeros = "0123456789";
 
-let validacionTieneNumeros: ValidacionClave = {
+//La clave no debe tener el nombre del usuario.
+let validacionTieneNombreUsuario: ValidacionClave = {
   esValida: false,
 };
 
-const tieneNumeros = (clave: string): ValidacionClave => {
-  for (let i = 0; i < clave.length; i++) {
-    if (numeros.indexOf(clave.charAt(i), 0) != -1) {
-      validacionTieneNumeros.esValida = true;
-      return validacionTieneNumeros;
-    }
+export const tieneNombreUsuario = (
+  nombreUsuario: string,
+  clave: string
+): ValidacionClave => {
+  if (!clave.toLowerCase().includes(nombreUsuario.toLowerCase())) {
+    validacionTieneNombreUsuario.esValida = true;
+    return validacionTieneNombreUsuario;
   }
-  validacionTieneNumeros.esValida = false;
-  validacionTieneNumeros.error = "La clave debe de tener números";
-  return validacionTieneNumeros;
+  validacionTieneNombreUsuario.esValida = false;
+  validacionTieneNombreUsuario.error =
+    "La clave no debe tener el nombre del usuario";
+  return validacionTienCaracteresEspeciales;
 };
 
 console.log("Tiene Numeros: ", tieneNumeros(clave));
