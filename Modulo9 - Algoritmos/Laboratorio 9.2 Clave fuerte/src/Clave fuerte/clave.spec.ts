@@ -1,9 +1,9 @@
 import {
-  tieneCaracteresEspeciales,
-  tieneLongitudMinima,
+  //tieneCaracteresEspeciales,
+  //tieneLongitudMinima,
   tieneMayusculasYMinusculas,
-  tieneNombreUsuario,
-  tieneNumeros,
+  //tieneNombreUsuario,
+  //tieneNumeros,
 } from "./clave";
 //import { ValidacionClave } from "./model";
 
