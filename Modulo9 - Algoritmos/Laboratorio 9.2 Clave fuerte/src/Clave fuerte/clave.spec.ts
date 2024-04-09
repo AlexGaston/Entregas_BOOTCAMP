@@ -1,9 +1,9 @@
 import {
-  //tieneCaracteresEspeciales,
-  //tieneLongitudMinima,
+  tieneCaracteresEspeciales,
+  tieneLongitudMinima,
   tieneMayusculasYMinusculas,
-  //tieneNombreUsuario,
-  //tieneNumeros,
+  tieneNombreUsuario,
+  tieneNumeros,
   tienePalabrasComunes,
 } from "./clave";
 //import { ValidacionClave } from "./model";
@@ -41,26 +41,25 @@ describe("tieneMayusculasYMinusculas", () => {
     //Act or WHEN
     const result = tieneMayusculasYMinusculas(clave);
     //Assert or THEN
-    const expected = { esValida: true };
+    const expected = { esValida: true, error: "" };
 
     expect(result).toEqual(expected);
   });
 });
 
-/*
 describe("tieneNumeros", () => {
   //REPASAR EL TEST
-  it("Si tenemos una clave con un número debería de devolver --> {esValida: true}", () => {
+  it("Si tenemos una clave CON un número debería de devolver --> {esValida: true}", () => {
     //Arrange or GIVEN
     const clave = "palabraclave1";
     //Act or WHEN
     const result = tieneNumeros(clave);
     //Assert or THEN
-    const expected = { esValida: true };
+    const expected = { esValida: true, error: "" };
 
     expect(result).toEqual(expected);
   });
-  it("Si tenemos una clave sin un número debería de devolver --> {esValida: false, error: 'La clave debe de tener números'}", () => {
+  it("Si tenemos una clave SIN un número debería de devolver --> {esValida: false, error: 'La clave debe de tener números'}", () => {
     //Arrange or GIVEN
     const clave = "palabraclave";
     //Act or WHEN
@@ -73,17 +72,16 @@ describe("tieneNumeros", () => {
 
     expect(result).toEqual(expected);
   });
-});*/
-/*
+});
+
 describe("tieneCaracteresEspeciales", () => {
-   
   it("Si tenemos una clave con un carácter especial devería de devolver --> {esValida: true}", () => {
     //Arrange or GIVEN
     const clave = "palabraClave!";
     //Act or WHEN
     const result = tieneCaracteresEspeciales(clave);
     //Assert or THEN
-    const expected = { esValida: true };
+    const expected = { esValida: true, error: "" };
 
     expect(result).toEqual(expected);
   });
@@ -101,8 +99,8 @@ describe("tieneCaracteresEspeciales", () => {
 
     expect(result).toEqual(expected);
   });
-});*/
-/*
+});
+
 describe("tieneLongitudMinima", () => {
   it("Si tenemos una clave con una longitud Mínima de 8 carácteres devería devolver --> {esValida: true}", () => {
     //Arrange or GIVEN
@@ -110,7 +108,7 @@ describe("tieneLongitudMinima", () => {
     //Act or WHEN
     const result = tieneLongitudMinima(clave);
     //Assert or THEN
-    const expected = { esValida: true };
+    const expected = { esValida: true, error: "" };
 
     expect(result).toEqual(expected);
   });
@@ -129,10 +127,9 @@ describe("tieneLongitudMinima", () => {
     expect(result).toEqual(expected);
   });
 });
-*/
-/*
+
 describe("tieneNombreUsuario", () => {
-  it("Si tenemos una clave que contiene el nombre de usuario debería devolver --> {esValida: false, error: 'La clave no debe tener el nombre del usuario'}", () => {
+  it("Si tenemos una clave que CONTIENE el nombre de usuario debería devolver --> {esValida: false, error: 'La clave no debe tener el nombre del usuario'}", () => {
     //Arrange or GIVEN
     const nombreUsuario = "palabra";
     const clave = "palabraclave";
@@ -147,21 +144,21 @@ describe("tieneNombreUsuario", () => {
     expect(result).toEqual(expected);
   });
 
-  it("Si tenemos una clave que  no contiene el nombre de usuario debería devolver --> {esValida: true}", () => {
+  it("Si tenemos una clave que  NO CONTIENE el nombre de usuario debería devolver --> {esValida: true}", () => {
     //Arrange or GIVEN
-    const nombreUsuario = "palabra";
+    const nombreUsuario = "usuario";
     const clave = "palabraclave";
     //Act or WHEN
     const result = tieneNombreUsuario(nombreUsuario, clave);
     //Assert or THEN
-    const expected = { esValida: true };
+    const expected = { esValida: true, error: "" };
 
     expect(result).toEqual(expected);
   });
-});*/
+});
 
 describe("tienePalabrasComunes", () => {
-  it("Si tenemos una clave que contiene una palabra comun debería devolver --> {esValida: false, error: 'La clave no debe de contener palabras comunes' }", () => {
+  it("Si tenemos una clave que contiene una palabra común debería devolver --> {esValida: false, error: 'La clave no debe de contener palabras comunes' }", () => {
     //Arrange or GIVEN
     const clave = "nuevopassword";
     const commonPasswords = ["password", "123456", "qwerty", "admin"];
@@ -176,15 +173,16 @@ describe("tienePalabrasComunes", () => {
     expect(result).toEqual(expected);
   });
 
-  it("Si tenemos una clave que NO contiene una palabra comun debería devolver --> {esValida: true}", () => {
+  it("Si tenemos una clave que NO contiene una palabra común debería devolver --> {esValida: true}", () => {
     //Arrange or GIVEN
-    const clave = "Alex";
+    const clave = "usuario";
     const commonPasswords = ["password", "123456", "qwerty", "admin"];
     //Act or WHEN
     const result = tienePalabrasComunes(clave, commonPasswords);
     //Assert or THEN
     const expected = {
       esValida: true,
+      error: "",
     };
     expect(result).toEqual(expected);
   });

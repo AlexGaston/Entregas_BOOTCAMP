@@ -1,32 +1,70 @@
 import "./style.css";
 import { ValidacionClave, commonPasswords } from "./Clave fuerte/model";
+import {
+  tieneCaracteresEspeciales,
+  tieneLongitudMinima,
+  tieneMayusculasYMinusculas,
+  tieneNombreUsuario,
+  tieneNumeros,
+  tienePalabrasComunes,
+  validacionMayusculasYMinusculas,
+  validacionTienCaracteresEspeciales,
+  validacionTieneLongitudMinima,
+  validacionTieneNombreUsuario,
+  validacionTieneNumeros,
+  validacionTienePalabrasComunes,
+} from "./Clave fuerte/clave";
 
-// La clave no debe de contener palabras comunes (le pasaremos un array de palabras comunes).
-
-const clave = "nuevo123123";
-
-let validacionTienePalabrasComunes: ValidacionClave = {
+const validacionClave: ValidacionClave = {
   esValida: true,
+  error: "",
 };
 
-const tienePalabrasComunes = (
+const nombreUsuario: string = "Alex";
+const clave: string = "Clave1!";
+
+const validarClave = (
+  nombreUsuario: string,
   clave: string,
   commonPasswords: string[]
 ): ValidacionClave => {
-  let contieneCommonPasswords = false;
-  contieneCommonPasswords = commonPasswords.some((password) =>
-    clave.includes(password)
-  );
-
-  if (contieneCommonPasswords) {
-    validacionTienePalabrasComunes.esValida = false;
-    validacionTienePalabrasComunes.error =
-      "La clave no debe de contener palabras comunes";
+  tieneMayusculasYMinusculas(clave);
+  if (validacionMayusculasYMinusculas.esValida === false) {
+    validacionClave.error = validacionMayusculasYMinusculas.error;
+    return validacionClave;
   }
-  return validacionTienePalabrasComunes;
+
+  tieneNumeros(clave);
+  if (validacionTieneNumeros.esValida === false) {
+    validacionClave.error = validacionTieneNumeros.error;
+    return validacionClave;
+  }
+
+  tieneCaracteresEspeciales(clave);
+  if (validacionTienCaracteresEspeciales.esValida === false) {
+    validacionClave.error = validacionTienCaracteresEspeciales.error;
+    return validacionClave;
+  }
+
+  tieneLongitudMinima(clave);
+  if (validacionTieneLongitudMinima.esValida === false) {
+    validacionClave.error = validacionTieneLongitudMinima.error;
+    return validacionClave;
+  }
+
+  tieneNombreUsuario(nombreUsuario, clave);
+  if (validacionTieneNombreUsuario.esValida === false) {
+    validacionClave.error = validacionTieneNombreUsuario.error;
+    return validacionClave;
+  }
+
+  tienePalabrasComunes(clave, commonPasswords);
+  if (validacionTienePalabrasComunes.esValida === false) {
+    validacionClave.error = validacionTienePalabrasComunes.error;
+    return validacionClave;
+  }
+
+  return validacionClave;
 };
 
-console.log(
-  "Tiene palabras comunes: ",
-  tienePalabrasComunes(clave, commonPasswords)
-);
+console.log(validarClave(nombreUsuario, clave, commonPasswords));

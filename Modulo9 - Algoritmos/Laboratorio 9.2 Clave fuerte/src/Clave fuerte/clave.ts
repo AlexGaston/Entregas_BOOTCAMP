@@ -1,18 +1,10 @@
-import { ValidacionClave, commonPasswords } from "./model";
-/*
-const validarClave = (
-    nombreUsuario: string,
-    clave: string,
-    commonPasswords: string[]
-  ): ValidacionClave => {
-    // ...
-  };
-*/
+import { ValidacionClave } from "./model";
 
 //La clave debe de tener mayúsculas y minúsculas
 
-let validacionMayusculasYMinusculas: ValidacionClave = {
+export let validacionMayusculasYMinusculas: ValidacionClave = {
   esValida: false,
+  error: "La clave debe de tener mayúsculas y minúsculas",
 };
 
 export const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
@@ -81,10 +73,7 @@ export const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
 
   if (tieneMayuscula && tieneMinuscula) {
     validacionMayusculasYMinusculas.esValida = true;
-  } else {
-    validacionMayusculasYMinusculas.esValida = false;
-    validacionMayusculasYMinusculas.error =
-      "La clave debe de tener mayúsculas y minúsculas";
+    validacionMayusculasYMinusculas.error = "";
   }
 
   return validacionMayusculasYMinusculas;
@@ -92,21 +81,22 @@ export const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
 
 // La clave debe de tener números
 
-let validacionTieneNumeros: ValidacionClave = {
+export let validacionTieneNumeros: ValidacionClave = {
   esValida: false,
+  error: "",
 };
-const numeros = "0123456789";
+//const numeros = "0123456789";
 
 export const tieneNumeros = (clave: string): ValidacionClave => {
   for (let i = 0; i < clave.length; i++) {
-    if (numeros.indexOf(clave.charAt(i), 0) != -1) {
+    if (!isNaN(parseInt(clave[i]))) {
       validacionTieneNumeros.esValida = true;
+      validacionTieneNumeros.error = "";
       return validacionTieneNumeros;
     }
-    validacionTieneNumeros.esValida = false;
-    validacionTieneNumeros.error = "La clave debe de tener números";
   }
-
+  validacionTieneNumeros.esValida = false;
+  validacionTieneNumeros.error = "La clave debe de tener números";
   return validacionTieneNumeros;
 };
 
@@ -145,7 +135,7 @@ const caracteresEspeciales = [
   "/",
   "?",
 ];
-let validacionTienCaracteresEspeciales: ValidacionClave = {
+export let validacionTienCaracteresEspeciales: ValidacionClave = {
   esValida: false,
 };
 
@@ -153,6 +143,7 @@ export const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
   for (let i = 0; i < clave.length; i++) {
     if (caracteresEspeciales.includes(clave[i])) {
       validacionTienCaracteresEspeciales.esValida = true;
+      validacionTienCaracteresEspeciales.error = "";
       return validacionTienCaracteresEspeciales;
     }
     validacionTienCaracteresEspeciales.esValida = false;
@@ -164,13 +155,14 @@ export const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
 };
 
 // La clave debe de tener una longitud mínima de 8 caracteres.
-let validacionTieneLongitudMinima: ValidacionClave = {
+export let validacionTieneLongitudMinima: ValidacionClave = {
   esValida: false,
 };
 
 export const tieneLongitudMinima = (clave: string): ValidacionClave => {
   if (clave.length >= 8) {
     validacionTieneLongitudMinima.esValida = true;
+    validacionTieneLongitudMinima.error = "";
     return validacionTieneLongitudMinima;
   }
   validacionTieneLongitudMinima.esValida = false;
@@ -180,7 +172,7 @@ export const tieneLongitudMinima = (clave: string): ValidacionClave => {
 };
 
 //La clave no debe tener el nombre del usuario.
-let validacionTieneNombreUsuario: ValidacionClave = {
+export let validacionTieneNombreUsuario: ValidacionClave = {
   esValida: false,
 };
 
@@ -190,17 +182,18 @@ export const tieneNombreUsuario = (
 ): ValidacionClave => {
   if (!clave.toLowerCase().includes(nombreUsuario.toLowerCase())) {
     validacionTieneNombreUsuario.esValida = true;
+    validacionTieneNombreUsuario.error = "";
     return validacionTieneNombreUsuario;
   }
   validacionTieneNombreUsuario.esValida = false;
   validacionTieneNombreUsuario.error =
     "La clave no debe tener el nombre del usuario";
-  return validacionTienCaracteresEspeciales;
+  return validacionTieneNombreUsuario;
 };
 
 // La clave no debe de contener palabras comunes (le pasaremos un array de palabras comunes).
 
-let validacionTienePalabrasComunes: ValidacionClave = {
+export let validacionTienePalabrasComunes: ValidacionClave = {
   esValida: true,
 };
 
@@ -217,6 +210,9 @@ export const tienePalabrasComunes = (
     validacionTienePalabrasComunes.esValida = false;
     validacionTienePalabrasComunes.error =
       "La clave no debe de contener palabras comunes";
+    return validacionTienePalabrasComunes;
   }
+  validacionTienePalabrasComunes.esValida = true;
+  validacionTienePalabrasComunes.error = "";
   return validacionTienePalabrasComunes;
 };
