@@ -1,26 +1,32 @@
 import "./style.css";
-import { ValidacionClave } from "./Clave fuerte/model";
+import { ValidacionClave, commonPasswords } from "./Clave fuerte/model";
 
-let clave = "palabraClave";
-const numeros = "0123456789";
+// La clave no debe de contener palabras comunes (le pasaremos un array de palabras comunes).
 
-//La clave no debe tener el nombre del usuario.
-let validacionTieneNombreUsuario: ValidacionClave = {
-  esValida: false,
+const clave = "nuevo";
+
+let validacionTienePalabrasComunes: ValidacionClave = {
+  esValida: true,
 };
 
-export const tieneNombreUsuario = (
-  nombreUsuario: string,
-  clave: string
+const tienePalabrasComunes = (
+  clave: string,
+  commonPasswords: string[]
 ): ValidacionClave => {
-  if (!clave.toLowerCase().includes(nombreUsuario.toLowerCase())) {
-    validacionTieneNombreUsuario.esValida = true;
-    return validacionTieneNombreUsuario;
+  let contieneCommonPasswords = false;
+  contieneCommonPasswords = commonPasswords.some((password) =>
+    clave.includes(password)
+  );
+
+  if (contieneCommonPasswords) {
+    validacionTienePalabrasComunes.esValida = false;
+    validacionTienePalabrasComunes.error =
+      "La clave no debe de contener palabras comunes";
   }
-  validacionTieneNombreUsuario.esValida = false;
-  validacionTieneNombreUsuario.error =
-    "La clave no debe tener el nombre del usuario";
-  return validacionTienCaracteresEspeciales;
+  return validacionTienePalabrasComunes;
 };
 
-console.log("Tiene Numeros: ", tieneNumeros(clave));
+console.log(
+  "Tiene palabras comunes: ",
+  tienePalabrasComunes(clave, commonPasswords)
+);
