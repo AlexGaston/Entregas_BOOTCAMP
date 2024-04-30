@@ -1,4 +1,4 @@
-const bancos = [
+export const bancos = [
   {
     codigo: "2080",
     nombreBanco: "Abanca Corporación Bancaria",

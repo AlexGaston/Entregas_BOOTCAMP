@@ -4,12 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <link rel="stylesheet" href="./src/reseteo.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <title>Expresiones Regulares - IBAN</title>
   </head>
   <body>
     <div id="app">
-      <h1>Expresiones Regulares - IBAN</h1>
+      <h2>Expresiones Regulares - IBAN</h2>
+      <div>
+        <label for="iban">Introduce tu IBAN:</label>
+        <input type="text" id="iban" />
+        <button id="checkIban">Verificar IBAN</button>
+        <div id="resultado" class="resultado"></div>
+      </div>
+      <div class="info">Banco: <b id="nombre-banco"></b></div>
+      <div class="info">Código sucursal: <b id="codigo-sucursal"></b></div>
+      <div class="info">Dígito de control: <b id="digito-control"></b></div>
+      <div class="info">Número de cuenta: <b id="numero-cuenta"></b></div>
     </div>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/validaciones.ts"></script>
   </body>
 </html>
