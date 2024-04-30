@@ -18,7 +18,7 @@ const obtenerCodigoHTML = (): void => {
 };
 
 const extraerImagenesDelCodigo = (codigoHTML: string) => {
-  const patron = /<img.*?src="(?<imagen>(.*))"/gi;
+  const patron = /<img.*?src="(?<imagen>(.*))"/gim;
 
   const coincidencia = patron.exec(codigoHTML);
   const imagenesEncontradas = [];
