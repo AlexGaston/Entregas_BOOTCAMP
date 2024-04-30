@@ -39,8 +39,6 @@ export const validacionIBAN = (): any => {
       );
       miBanco = nombreBanco[0].nombreBanco;
 
-      console.log("Nombre de Banco: ", miBanco);
-
       pintarMensaje();
       pintarBanco();
       pintarCodigoSucursal();
