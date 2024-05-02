@@ -15,22 +15,25 @@ const obtenerCodigoHTML = (): void => {
     //console.log(codigoHTML);
   }
   extraerImagenesDelCodigo(codigoHTML);
+  //pintarUrlsDeImagenesEncontradas();
 };
 
 const extraerImagenesDelCodigo = (codigoHTML: string) => {
-  const patron = /<img.*?src="(?<imagen>(.*))"/gim;
+  const patron = /http:\/\/.*.[a-z]{3,4}/gim;
 
-  const coincidencia = patron.exec(codigoHTML);
-  const imagenesEncontradas = [];
+  let coincidencia = codigoHTML.match(patron) as string [];
+  console.log(coincidencia);
+  
+};
 
-  if (coincidencia) {
-    const { imagen } = coincidencia.groups as any;
-
-    console.log("Imagenes: ", imagen);
-    return true;
-  } else {
-    console.log("No se ha encontrado ninguna imagen en el código");
-    return false;
+const pintarUrlsDeImagenesEncontradas = () => {
+  const divImagenes = document.getElementById("imagenes-encontradas");
+  if (
+    divImagenes !== null &&
+    divImagenes !== undefined &&
+    divImagenes instanceof HTMLDivElement
+  ) {
+    divImagenes.innerHTML = ;
   }
 };
 
