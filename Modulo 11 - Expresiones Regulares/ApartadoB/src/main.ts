@@ -21,12 +21,11 @@ const extraerImagenesDelCodigo = (codigoHTML: string) => {
 
   const imagenesEncontradas = codigoHTML.match(patron);
   console.log(imagenesEncontradas);
-  if (imagenesEncontradas !== null && imagenesEncontradas !== undefined &&) {
+  if (imagenesEncontradas !== null && imagenesEncontradas !== undefined) {
     const { imagenUrl } = imagenesEncontradas.groups as any;
 
-      console.log("URLs: ", imagenUrl);
-      urlImagenes = imagenUrl;
-
+    console.log("URLs: ", imagenUrl);
+    urlImagenes = imagenUrl;
   }
 };
 
