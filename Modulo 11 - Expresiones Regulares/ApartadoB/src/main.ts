@@ -1,7 +1,7 @@
 import "./style.css";
 
 let codigoHTML = "";
-//let imagenesEncontradas = [];
+let urlImagenes = [];
 
 const obtenerCodigoHTML = (): void => {
   const textAreacodigoHTML = document.getElementById("codigo-HTML");
@@ -19,19 +19,15 @@ const obtenerCodigoHTML = (): void => {
 const extraerImagenesDelCodigo = (codigoHTML: string) => {
   const patron = /<img .*?src="(?<imagenUrl>.*?[a-z]{3,4})"/gim;
 
-  const coincidencia = codigoHTML.match(patron);
-  console.log(coincidencia);
+  const imagenesEncontradas = codigoHTML.match(patron);
+  console.log(imagenesEncontradas);
+  if (imagenesEncontradas !== null && imagenesEncontradas !== undefined &&) {
+    const { imagenUrl } = imagenesEncontradas.groups as any;
 
-  if (coincidencia) {
-    const { imagenUrl } = coincidencia.groups as any;
-    let imagenesEncontradas = imagenUrl;
-    console.log("Imagenes Encontradas: ", imagenesEncontradas);
-    return imagenesEncontradas;
-  } else {
-    alert("No se han encontrado imagenes");
+      console.log("URLs: ", imagenUrl);
+      urlImagenes = imagenUrl;
+
   }
-
-  //imagenesEncontradas = coincidencia;
 };
 
 /*const pintarUrlsDeImagenesEncontradas = () => {
@@ -41,7 +37,7 @@ const extraerImagenesDelCodigo = (codigoHTML: string) => {
     divImagenes !== undefined &&
     divImagenes instanceof HTMLDivElement
   ) {
-    divImagenes.innerHTML = imagenesEncontradas;
+    divImagenes.innerHTML = urlImagenes;
   }
 };*/
 
