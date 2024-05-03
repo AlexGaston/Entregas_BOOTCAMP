@@ -24,7 +24,13 @@ const extraerImagenesDelCodigo = (codigoHTML: string) => {
     const listado = document.querySelector("#imagenes-encontradas");
     for (let i = 0; i < imagenesEncontradas.length; i++) {
       const urlimagen = crearParrafo(imagenesEncontradas[i]);
-      listado?.appendChild(urlimagen);
+      if (
+        listado !== null &&
+        listado !== undefined &&
+        listado instanceof HTMLDivElement
+      ) {
+        listado.appendChild(urlimagen);
+      }
     }
   }
 };
