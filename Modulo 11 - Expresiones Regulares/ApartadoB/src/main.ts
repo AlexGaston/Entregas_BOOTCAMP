@@ -1,8 +1,7 @@
 import "./style.css";
 
-console.log("Hello Typescript!");
-
 let codigoHTML = "";
+//let imagenesEncontradas = [];
 
 const obtenerCodigoHTML = (): void => {
   const textAreacodigoHTML = document.getElementById("codigo-HTML");
@@ -12,30 +11,39 @@ const obtenerCodigoHTML = (): void => {
     textAreacodigoHTML instanceof HTMLTextAreaElement
   ) {
     codigoHTML = textAreacodigoHTML.value;
-    //console.log(codigoHTML);
   }
   extraerImagenesDelCodigo(codigoHTML);
   //pintarUrlsDeImagenesEncontradas();
 };
 
 const extraerImagenesDelCodigo = (codigoHTML: string) => {
-  const patron = /http:\/\/.*.[a-z]{3,4}/gim;
+  const patron = /<img .*?src="(?<imagenUrl>.*?[a-z]{3,4})"/gim;
 
-  let coincidencia = codigoHTML.match(patron) as string [];
+  const coincidencia = codigoHTML.match(patron);
   console.log(coincidencia);
-  
+
+  if (coincidencia) {
+    const { imagenUrl } = coincidencia.groups as any;
+    let imagenesEncontradas = imagenUrl;
+    console.log("Imagenes Encontradas: ", imagenesEncontradas);
+    return imagenesEncontradas;
+  } else {
+    alert("No se han encontrado imagenes");
+  }
+
+  //imagenesEncontradas = coincidencia;
 };
 
-const pintarUrlsDeImagenesEncontradas = () => {
+/*const pintarUrlsDeImagenesEncontradas = () => {
   const divImagenes = document.getElementById("imagenes-encontradas");
   if (
     divImagenes !== null &&
     divImagenes !== undefined &&
     divImagenes instanceof HTMLDivElement
   ) {
-    divImagenes.innerHTML = ;
+    divImagenes.innerHTML = imagenesEncontradas;
   }
-};
+};*/
 
 const botonExtraer = document.getElementById("extraer-imagenes");
 if (
