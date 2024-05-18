@@ -1,5 +1,6 @@
 import {
   validacionFormatoIBAN,
+  extraerParametrosIBAN,
   miBanco,
   miSucursal,
   miDigitoControl,
@@ -8,7 +9,7 @@ import {
 
 import { ibanleido, validacionIban } from "./main";
 
-export const pintarValidacionFormatoiban = () => {
+const pintarValidacionFormatoiban = () => {
   const divResultado = document.getElementById("resultado");
   if (validacionFormatoIBAN(ibanleido)) {
     if (
@@ -29,7 +30,7 @@ export const pintarValidacionFormatoiban = () => {
   }
 };
 
-export const pintarValidacionIban = () => {
+const pintarValidacionIban = () => {
   const divValidacionIban = document.getElementById("validacion-iban");
   if (validacionIban(ibanleido)) {
     if (
@@ -50,7 +51,7 @@ export const pintarValidacionIban = () => {
   }
 };
 
-export const pintarBanco = () => {
+const pintarBanco = () => {
   const divBanco = document.getElementById("nombre-banco");
   if (
     divBanco !== null &&
@@ -70,6 +71,20 @@ export const pintarCodigoSucursal = () => {
   ) {
     divCodigoSucursal.innerHTML = miSucursal;
   }
+};
+
+export const pintarInfoIBAN = () => {
+  pintarValidacionFormatoiban();
+  pintarValidacionIban();
+  extraerParametrosIBAN(ibanleido);
+  pintarBanco();
+  pintarCodigoSucursal();
+  pintarDigitoControl();
+  pintarNumeroDeCuenta();
+};
+
+export const pintarErrorFormatoIBAN = () => {
+  pintarValidacionFormatoiban();
 };
 
 export const pintarDigitoControl = () => {

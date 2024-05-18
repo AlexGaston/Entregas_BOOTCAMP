@@ -1,4 +1,5 @@
 import "./style.css";
+import { extraerImagenesDelCodigo } from "./validacion";
 
 let codigoHTML = "";
 
@@ -14,7 +15,7 @@ const obtenerCodigoHTML = (): void => {
   extraerImagenesDelCodigo(codigoHTML);
 };
 
-const extraerImagenesDelCodigo = (codigoHTML: string) => {
+/*const extraerImagenesDelCodigo = (codigoHTML: string) => {
   const patron = /(http|https):\/\/.{1,}(webp|jpg|png|svg)"/gim;
 
   const imagenesEncontradas = codigoHTML.match(patron);
@@ -33,14 +34,7 @@ const extraerImagenesDelCodigo = (codigoHTML: string) => {
       }
     }
   }
-};
-
-const crearParrafo = (texto: string): HTMLParagraphElement => {
-  const parrafo = document.createElement("p");
-  parrafo.textContent = texto;
-
-  return parrafo;
-};
+};*/
 
 const botonExtraer = document.getElementById("extraer-imagenes");
 if (

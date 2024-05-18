@@ -1,15 +1,7 @@
 import "./style.css";
-import { validacionFormatoIBAN, extraerParametrosIBAN } from "./validacion";
+import { validacionFormatoIBAN } from "./validacion";
 
-import {
-  pintarValidacionFormatoiban,
-  pintarValidacionIban,
-  pintarBanco,
-  pintarCodigoSucursal,
-  pintarDigitoControl,
-  pintarNumeroDeCuenta,
-  borrarDatos,
-} from "./ui";
+import { borrarDatos, pintarInfoIBAN, pintarErrorFormatoIBAN } from "./ui";
 
 import { isValidIBAN } from "ibantools";
 
@@ -25,15 +17,9 @@ const leerIban = () => {
     ibanleido = campoIban.value;
   }
 
-  pintarValidacionFormatoiban();
-  pintarValidacionIban();
-  if (validacionFormatoIBAN(ibanleido)) {
-    extraerParametrosIBAN(ibanleido);
-    pintarBanco();
-    pintarCodigoSucursal();
-    pintarDigitoControl();
-    pintarNumeroDeCuenta();
-  }
+  validacionFormatoIBAN(ibanleido)
+    ? pintarInfoIBAN()
+    : pintarErrorFormatoIBAN();
 };
 
 export const validacionIban = (ibanleido: string): boolean => {
@@ -59,5 +45,5 @@ if (
   botonreset !== undefined &&
   botonreset instanceof HTMLButtonElement
 ) {
-  botonreset?.addEventListener("click", borrarDatos);
+  botonreset.addEventListener("click", borrarDatos);
 }
